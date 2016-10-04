@@ -4,7 +4,7 @@ from eval import calculateMeasures
 
 run_nlp('../../data/train', '_train/spacy')
 
-generate_iob_tags('../../data/train', '_train/spacy', 'train/iob')
+generate_iob_tags('../../data/train', '_train/spacy', '_train/iob')
 
 iob_to_brat('train/iob', '../../data/train', '_train/brat')
 
