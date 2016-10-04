@@ -1,0 +1,11 @@
+T1	Task 4 13	ART model
+T2	Task 19 148	hadronic transport model that includes baryons such as N, Δ(1232), N∗(1440), N∗(1535), Λ, Σ, and mesons such as π, ρ, ω, η, K, K∗
+R1	Hyponym-of Arg1:T1 Arg2:T2	
+T3	Process 244 291	experimental data from hadron–hadron collisions
+T4	Task 155 187	elastic and inelastic collisions
+T5	Process 297 306	ART model
+T6	Task 412 473	kaon antiflow [11,12] in heavy ion collisions at AGS energies
+T7	Process 479 488	ART model
+T8	Task 507 635	understand whether or not the strongly interacting matter formed in these collisions reaches chemical and/or thermal equilibrium
+T9	Task 662 723	extend the ART model to include perturbatively the Ξ particle
+T10	Material 777 792	transport model

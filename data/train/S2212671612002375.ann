@@ -1,0 +1,16 @@
+T1	Process 0 34	Power Grid reasoning expert system
+T2	Process 48 54	system
+R1	Hyponym-of Arg1:T2 Arg2:T1	
+T3	Material 86 100	knowledge Base
+T4	Process 104 117	expert system
+T5	Task 122 190	abstract and analyze the power grid security investigation procedure
+T6	Process 147 190	power grid security investigation procedure
+T7	Process 200 219	ontology Technology
+T8	Process 226 266	ontology-based Power Grid knowledge base
+T9	Task 281 330	associated relationship of procedure vocabularies
+T10	Task 375 399	semantic reasoning tools
+T11	Material 408 412	Jena
+T12	Process 418 436	reasoner mechanism
+T13	Process 441 467	inference rules of grammar
+T14	Task 519 539	specific application
+T15	Process 543 598	security investigation procedure ontology and reasoning

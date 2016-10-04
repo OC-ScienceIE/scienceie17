@@ -1,0 +1,18 @@
+T1	Task 4 36	spins and parities of Θ+ and Ξ−−
+T2	Task 79 110	new wave of pentaquark research
+T3	Process 136 162	take the spin equal to 1/2
+T4	Process 201 232	chiral soliton or Skyrme models
+T5	Process 264 288	constituent quark models
+T6	Task 342 366	parity of the pentaquark
+T7	Task 379 387	P=(−)ℓ+1
+R1	Hyponym-of Arg1:T6 Arg2:T7	
+T8	Task 395 396	ℓ
+T9	Task 404 481	angular momentum associated with the relative coordinates of the q4 subsystem
+R2	Hyponym-of Arg1:T8 Arg2:T9	
+T10	Task 513 577	subsystem of four light quarks is in a state of orbital symmetry
+T11	Process 897 1028	comparison between the realistic calculations for positive parity [12] and negative parity [14], based on the same quark model [15]
+T12	Process 1503 1539	lower the energy of the whole system
+T13	Task 634 648	kinetic energy
+T14	Task 692 720	totally symmetric [4]O state
+T15	Process 777 838	flavour–spin interaction [12] and the colour–spin interaction
+T16	Process 1220 1411	an attractive spin–spin interaction between s̄ and the light quarks was incorporated and shown that a stable or narrow positive parity uudds̄ pentaquark can be accommodated within such a mode

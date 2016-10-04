@@ -1,0 +1,16 @@
+T1	Task 45 66	deformation structure
+T2	Process 139 212	action should reduce to N=1/2 super-Yang–Mills theory with adjoint matter
+T3	Task 246 265	singlet deformation
+T4	Process 281 376	the deformation parameters belongs to the singlet representation of the R-symmetry group SU(2)R
+T5	Task 408 496	N=2 supersymmetric U(1) gauge theory in the harmonic superspace with singlet deformation
+T6	Task 512 555	the gauge and supersymmetry transformations
+T7	Process 556 606	get correction linear in the deformation parameter
+T8	Process 632 746	perform the field redefinition such that the component fields transform canonically under the gauge transformation
+T9	Task 763 792	N=1/2 super-Yang–Mills theory
+T10	Process 794 834	such field redefinition is also possible
+T11	Task 861 877	component fields
+T12	Process 878 954	do not transform canonically under the deformed supersymmtery transformation
+T13	Task 963 975	singlet case
+T14	Process 995 1115	there is a field redefinition such that the redefined fields also transform canonically under the deformed supersymmetry
+T15	Process 1117 1230	We will construct a deformed Lagrangian which is invariant under both the gauge and supersymmetry transformations
+T16	Process 1232 1341	We find that the deformed Lagrangian is characterized by a single function of an antiholomorphic scalar field

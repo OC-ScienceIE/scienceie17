@@ -1,0 +1,15 @@
+T1	Process 10 52	extension to the charmed analogue Θc(3099)
+T2	Task 90 127	SDO sum rule and lattice calculations
+T3	Task 144 155	charm quark
+T4	Process 183 208	constituent-quark picture
+T5	Process 230 296	JW prediction for the parity is expected to be reproduced from QCD
+T6	Task 307 335	quenched lattice calculation
+T7	Process 1252 1278	QCD sum rules for Θc(3099)
+T8	Task 1283 1336	see how they are different from the Θ+(1540) sum rule
+T9	Task 479 487	sum rule
+T10	Process 638 654	radiating gluons
+T11	Process 761 819	replaced by gluonic operators in the heavy quark expansion
+T12	Process 864 913	charm quark mass has to be kept finite in the OPE
+T13	Material 946 1002	momentum space expression for the charm-quark propagator
+T14	Process 1094 1202	coordinate space and all the quark propagators are obtained based on the expansion with the small quark mass
+T15	Task 660 699	quark–gluon mixed condensate 〈s̄gsσ·Gs〉

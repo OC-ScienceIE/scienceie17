@@ -1,0 +1,21 @@
+T1	Process 21 33	thresholding
+T2	Material 37 54	gray level images
+T3	Process 94 113	pattern recognition
+T4	Process 118 133	computer vision
+T5	Process 146 155	detecting
+T6	Process 157 165	tracking
+T7	Process 170 181	recognizing
+T8	Process 187 198	Otsu scheme
+T9	Process 220 242	thresholding technique
+R1	Hyponym-of Arg1:T9 Arg2:T8	
+T10	Process 275 285	segmenting
+T11	Material 288 304	gray level image
+*	Synonym-of T11 T2
+T12	Process 319 337	modal distribution
+T13	Process 341 362	gray level histogram.
+T14	Task 450 475	enhancing the performance
+T15	Process 483 497	Otsu algorithm
+T16	Process 546 579	Otsu image thresholding algorithm
+T17	Task 602 617	extensive tests
+T18	Process 724 751	Otsu thresholding algorithm
+*	Synonym-of T16 T18

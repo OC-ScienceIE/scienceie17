@@ -1,0 +1,8 @@
+T1	Process 271 295	laser-driven plasma wave
+T2	Process 317 344	high-intensity laser pulses
+T5	Task 869 901	Stern–Gerlach-type contributions
+T3	Material 202 210	electron
+T6	Material 235 256	electromagnetic field
+T4	Material 567 576	electrons
+T7	Material 737 782	high electric field gradient of a plasma wave
+T8	Material 930 938	electron

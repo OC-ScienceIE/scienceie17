@@ -1,0 +1,8 @@
+T1	Process 107 122	fusion reactors
+T2	Process 238 253	fusion reactors
+T3	Process 464 479	static surfaces
+T4	Material 0 26	Power and particle exhaust
+T5	Process 365 384	neutron irradiation
+T6	Task 615 639	plasma facing components
+T7	Task 641 645	PFCs
+*	Synonym-of T7 T6

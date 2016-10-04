@@ -1,0 +1,65 @@
+T2	Task 25 33	B decays
+T3	Process 59 70	decay pairs
+T4	Process 146 158	pseudoscalar
+T5	Process 160 161	P
+T6	Process 166 173	vector 
+T7	Process 174 175	V
+T8	Process 177 183	mesons
+*	Synonym-of T6 T7
+*	Synonym-of T4 T5
+R1	Hyponym-of Arg1:T6 Arg2:T8	
+R2	Hyponym-of Arg1:T4 Arg2:T8	
+T9	Process 234 249	VV final states
+T10	Process 273 283	PP states.
+T11	Process 347 359	final-state 
+T12	Process 359 362	π0.
+R3	Hyponym-of Arg1:T12 Arg2:T11	
+T13	Task 411 434	find the decay vertices
+T14	Process 494 496	π0
+T15	Process 521 523	ρ0
+T16	Process 538 553	pairs of decays
+T17	Process 569 574	SU(3)
+T18	Material 582 584	SM
+T19	Process 597 600	ss¯
+T20	Process 602 612	quark pair
+R4	Hyponym-of Arg1:T19 Arg2:T20	
+T21	Process 664 667	ss¯
+T22	Process 681 682	η
+T23	Process 687 689	η′
+T24	Process 674 680	mesons
+R5	Hyponym-of Arg1:T22 Arg2:T24	
+R6	Hyponym-of Arg1:T23 Arg2:T24	
+T25	Process 699 702	ss¯
+T26	Process 747 750	uu¯
+T27	Process 756 760	(dd¯
+T28	Process 786 791	b¯→s¯
+T29	Process 796 801	b¯→d¯
+T30	Process 802 808	decays
+R7	Hyponym-of Arg1:T29 Arg2:T30	
+R8	Hyponym-of Arg1:T28 Arg2:T30	
+T31	Process 835 840	SU(3)
+T32	Material 848 850	SM
+T33	Process 882 883	η
+T34	Process 887 889	η′
+T35	Process 925 937	vector meson
+T36	Process 938 939	ϕ
+R9	Hyponym-of Arg1:T36 Arg2:T35	
+T37	Process 974 985	quark state
+T38	Process 1017 1019	B0
+T39	Process 1024 1027	B¯0
+T40	Process 1039 1063	decay to the final state
+T41	Process 1121 1123	K0
+T42	Process 1128 1132	K¯0)
+T43	Process 1133 1138	meson
+R10	Hyponym-of Arg1:T42 Arg2:T43	
+R11	Hyponym-of Arg1:T41 Arg2:T43	
+T44	Process 1170 1190	final-state particle
+T45	Process 1197 1217	excited neutral kaon
+T46	Process 1251 1254	K*0
+T47	Process 1276 1280	K¯*0
+T48	Process 1300 1312	vector meson
+T49	Process 1333 1347	decay to ψKsπ0
+T50	Process 1359 1379	measurement of sin2β
+T51	Process 1409 1411	B0
+T52	Process 1416 1419	B¯0
+T53	Process 1424 1429	decay

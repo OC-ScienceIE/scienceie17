@@ -1,0 +1,28 @@
+T1	Process 31 48	B3LYP/aug-cc-pVTZ
+T2	Process 100 125	lowest electronic singlet
+T3	Process 166 181	linear response
+T4	Process 183 185	LR
+*	Synonym-of T3 T4
+T5	Process 187 235	coupled cluster hierarchy CCS, CC2, CCSD and CC3
+T6	Process 248 298	perturbative corrected methods CIS(D) and CCSDR(3)
+T7	Process 304 331	correlated response methods
+T8	Process 368 390	atomic natural orbital
+T9	Process 392 395	ANO
+*	Synonym-of T8 T9
+T10	Material 435 444	manganese
+T11	Material 494 500	oxygen
+T12	Process 421 431	6s5p4d3f1g
+T13	Process 469 476	cc-pVTZ
+T14	Process 512 548	all-electron correlated calculations
+T15	Material 583 584	O
+T16	Material 589 591	Mn
+T17	Task 678 697	excitation energies
+T18	Process 718 733	EOM-CCSD method
+T19	Process 743 750	cc-pVTZ
+T20	Process 797 804	LR-CCSD
+T21	Task 843 862	excitation energies
+T22	Task 877 895	transition moments
+T23	Process 918 925	LR-CCSD
+T24	Process 927 943	Abelian symmetry
+T25	Process 976 1002	excited state calculations
+T26	Task 4 23	optimised structure

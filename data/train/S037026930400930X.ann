@@ -1,0 +1,13 @@
+T1	Task 57 81	calculating upper limits
+T2	Material 198 219	Feldman and Cousins [
+T3	Process 285 310	incorporate uncertainties
+T4	Process 343 362	background estimate
+T5	Material 397 417	Cousins and Highland
+T6	Process 426 444	further refinement
+T7	Process 497 522	more appropriate behavior
+T8	Task 530 541	upper limit
+T9	Task 580 614	less than the estimated background
+T11	Material 702 708	Table 
+T10	Process 748 772	calculate an upper limit
+T12	Process 844 873	probability density functions
+T13	Process 887 907	background estimates

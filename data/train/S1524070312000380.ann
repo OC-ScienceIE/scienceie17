@@ -1,0 +1,19 @@
+T1	Process 0 21	Isogeometric analysis
+T2	Process 23 26	IGA
+*	Synonym-of T2 T1
+T3	Process 33 60	numerical simulation method
+R1	Hyponym-of Arg1:T1 Arg2:T3	
+T4	Process 92 132	NURBS-based representation of CAD models
+T5	Process 259 291	physical domain is parameterized
+T6	Process 490 499	splitting
+T7	Process 1657 1665	sweeping
+T8	Process 568 587	Galerkin projection
+T9	Process 655 700	formulation of partial differential equations
+T10	Process 744 765	isogeometric analysis
+T11	Process 1033 1050	numerical methods
+T12	Task 1132 1187	discuss the regularity properties of the test functions
+T13	Task 1229 1307	consider several important classes of singularities of NURBS parameterizations
+T14	Task 1331 1412	derive additional conditions which guarantee the regularity of the test functions
+T15	Task 1429 1458	present a modification scheme
+T16	Process 1467 1493	discretized function space
+T17	Process 1639 1652	parameterized

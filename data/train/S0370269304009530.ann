@@ -1,0 +1,18 @@
+T1	Process 22 35	supersymmetry
+T2	Process 37 41	SUSY
+*	Synonym-of T1 T2
+T3	Task 47 68	discovered at the LHC
+T5	Process 173 197	predicted super-partners
+T6	Process 255 269	SUSY particles
+T7	Process 289 330	Angular distributions in sparticle decays
+T8	Process 339 355	charge asymmetry
+T9	Process 359 398	lepton-jet invariant mass distributions
+T10	Process 429 477	proportional to the primary production asymmetry
+T11	Process 567 585	mSUGRA model point
+T12	Process 612 635	asymmetry distributions
+T4	Task 94 111	measure the spins
+T13	Process 512 535	Monte Carlo simulations
+T14	Material 123 132	particles
+T15	Material 725 734	particles
+T16	Material 486 493	squarks
+T17	Material 498 510	anti-squarks

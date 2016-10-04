@@ -1,0 +1,14 @@
+T1	Process 3 23	prove the uniqueness
+T2	Task 88 154	among all non-singular solutions with a four-dimensional Poincaré,
+T3	Task 153 191	, de Sitter or anti-de Sitter symmetry
+R1	Hyponym-of Arg1:T3 Arg2:T2	
+T4	Process 196 232	construct the most general solutions
+T5	Task 241 294	axial symmetry in the two-dimensional internal space,
+T6	Process 352 391	non-singular away from a conical defect
+T7	Process 455 504	interpretation of 3-branes with negative tension.
+T8	Process 507 527	prove the uniqueness
+T9	Task 592 695	among all non-singular solutions with a four-dimensional Poincaré, de Sitter or anti-de Sitter symmetry
+T10	Process 700 736	construct the most general solutions
+T11	Task 745 797	axial symmetry in the two-dimensional internal space
+T12	Process 856 895	non-singular away from a conical defect
+T13	Process 959 1008	interpretation of 3-branes with negative tension.

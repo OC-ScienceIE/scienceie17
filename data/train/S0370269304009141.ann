@@ -1,0 +1,15 @@
+T1	Task 0 52	Longitudinal beam and target single-spin asymmetries
+T2	Process 139 183	HERMES and CLAS experimental Collaborations 
+T3	Process 285 358	T-odd fragmentation functions [5], in particular, of the Collins function
+T4	Task 376 399	both types of asymmetry
+T5	Process 404 464	receive contributions also from T-odd distribution functions
+T6	Process 804 826	quark mass corrections
+T7	Process 527 599	exhaustive treatment of the contributions of T-odd distribution function
+T8	Process 662 701	subleading order in an expansion in 1/Q
+T9	Task 834 1027	the purpose of the present work to describe the longitudinal beam and target spin asymmetries in a complete way in terms of leading and subleading twist distribution and fragmentation functions
+T10	Task 1046 1131	single-particle inclusive DIS, e+p→e′+h+X, and single-jet inclusive DIS, e+p→e′+jet+X
+T11	Process 1143 1156	factorization
+T12	Task 1167 1182	these processes
+T13	Task 1266 1322	subleading-twist transverse-momentum dependent functions
+T14	Process 1216 1254	no factorization proof for observables
+T15	Task 1353 1371	leading-twist case

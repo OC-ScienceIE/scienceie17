@@ -1,0 +1,20 @@
+T1	Process 17 31	robot dynamics
+T2	Process 81 95	robot dynamics
+*	Synonym-of T1 T2
+T3	Task 67 95	efficiency of robot dynamics
+T4	Material 146 152	Screws
+T5	Task 165 190	describe dynamic problems
+T6	Material 213 233	O(N) recursive robot
+T7	Process 213 259	O(N) recursive robot forward dynamic algorithm
+T8	Process 307 359	tree topology, closed loop and spatial robot systems
+T9	Task 379 417	methods of robot dynamics are compared
+T10	Process 457 487	dynamics described with screws
+T11	Material 481 487	screws
+*	Synonym-of T4 T11 T14
+T12	Process 503 537	high efficient dynamics modelling.
+T13	Process 542 563	dynamical expressions
+T14	Material 573 579	screws
+T15	Material 630 634	O(N)
+T16	Process 642 673	linear to the degree of freedom
+T17	Task 684 721	improvement of computation efficiency
+T18	Process 740 766	real-time dynamics control
