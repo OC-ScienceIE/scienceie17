@@ -24,7 +24,7 @@ Setup
 
 4. Clone git repos
 
-	$ git clone ...
+	$ git clone https://github.com/OC-ScienceIE/scienceie17.git
 
 5. Extend Python search path
 
