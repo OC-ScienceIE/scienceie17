@@ -34,9 +34,13 @@ Setup
 
 6. Install additional dependencies
 
- 	$ pip install python-crfsuite
+ 	$ pip install sklearn-crfsuite
 	$ pip install spacy
 	$ sputnik --name spacy --repository-url http://index.spacy.io install en==1.1.0
+
+7. Preprocess data (run Spacy NLP, derive IOB tags)
+
+ 	$ bin/preproc.py
 
 
 For subsequent use, step 3 & 5 can also be carried out by running

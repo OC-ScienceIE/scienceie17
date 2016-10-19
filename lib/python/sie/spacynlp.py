@@ -5,7 +5,8 @@ NLP processing of annotated data with Spacy
 from glob import glob
 from os.path import join, splitext, basename
 from os import makedirs
-from pickle import dump
+import pickle
+import json
 
 import numpy as np
 
@@ -29,7 +30,10 @@ def run_nlp(txt_dir, spacy_dir, nlp=None):
     for txt_fname in glob(join(txt_dir, '*.txt')):
         print('reading ' + txt_fname)
         text = open(txt_fname).read()
-        doc = nlp(text)
+        # Spacy considers '\n' as a separate token.
+        # That causes problems when writing tokens in column format,
+        # so we strip the final '\n'.
+        doc = nlp(text.rstrip('\n'))
         spacy_fname = join(spacy_dir,
                            splitext(basename(txt_fname))[0] + '.spacy')
         print('writing ' + spacy_fname)
@@ -41,6 +45,9 @@ def generate_iob_tags(ann_dir, spacy_dir, iob_dir, nlp=None):
     Generate files with IOB tags from Brat .ann files in ann_dir,
     Spacy serialized analyses in spacy_dir, writing to output files to iob_dir
     """
+    #TODO This does not correctly handle embedded entities of the same type!
+    # E.g. Material inside anotehr Material
+
     if not nlp:
         nlp = spacy.load('en')
 
@@ -56,7 +63,7 @@ def generate_iob_tags(ann_dir, spacy_dir, iob_dir, nlp=None):
 
         iob_tags = {}
         for label in ENTITIES:
-            iob_tags[label] = len(doc) * ['O-' + label]
+            iob_tags[label] = len(doc) * ['O']
 
         for line in open(ann_fname):
             if line.startswith('T'):
@@ -81,12 +88,12 @@ def generate_iob_tags(ann_dir, spacy_dir, iob_dir, nlp=None):
                     print()
                     incorrect += 1
                 else:
-                    iob_tags[label][start_token] = 'B-' + label
+                    iob_tags[label][start_token] = 'B'
                     for i in range(start_token + 1, end_token):
-                        iob_tags[label][i] = 'I-' + label
+                        iob_tags[label][i] = 'I'
                     correct += 1
 
-        iob_fname = join(iob_dir, splitext(basename(ann_fname))[0] + '.tsv')
+        iob_fname = join(iob_dir, splitext(basename(ann_fname))[0] + '.json')
         write_iob_file(iob_fname, doc, iob_tags)
 
     print('\n#succesful spans: {}\n#failed spans: {}'.format(
@@ -94,20 +101,25 @@ def generate_iob_tags(ann_dir, spacy_dir, iob_dir, nlp=None):
 
 
 def write_iob_file(iob_fname, doc, iob_tags):
-    print('writing ' + iob_fname)
+    doc_iob = []
+
+    for sent in doc.sents:
+        sent_iob = []
+
+        for token in sent:
+            token_iob = {'token': token.orth_,
+                         'begin': token.idx,
+                         'end': token.idx + len(token.orth_),
+                         'Material': iob_tags['Material'][token.i],
+                         'Process': iob_tags['Process'][token.i],
+                         'Task': iob_tags['Task'][token.i]
+                         }
+            sent_iob.append(token_iob)
+        doc_iob.append(sent_iob)
+
     with open(iob_fname, 'w') as outf:
-        for token in doc:
-            # Spacy considers some whitespace such as '\n' as tokens.
-            # Remember to skip those when generating features per token!
-            if not token.is_space:
-                print('\t'.join([
-                    token.orth_,
-                    str(token.idx),
-                    str(token.idx + len(token.orth_)),
-                    iob_tags['Material'][token.i],
-                    iob_tags['Process'][token.i],
-                    iob_tags['Task'][token.i]
-                ]), file=outf)
+        print('writing ' + iob_fname)
+        json.dump(doc_iob, outf, indent=4, sort_keys=True)
 
 
 def map_chars_to_tokens(doc):
@@ -142,17 +154,17 @@ def map_chars_to_tokens(doc):
 
 
 def write_doc(spacy_fname, doc):
+    print('writing ' + spacy_fname)
     byte_string = doc.to_bytes()
     open(spacy_fname, 'wb').write(byte_string)
 
 
 def read_doc(spacy_fname, nlp):
+    print('reading ' + spacy_fname)
     byte_string = next(Doc.read_bytes(open(spacy_fname, 'rb')))
     doc = Doc(nlp.vocab)
     doc.from_bytes(byte_string)
     return doc
-
-
 
 
 # ******************************************************************************
@@ -216,7 +228,7 @@ def add_entities(ann_dir, spacy_dir, ents_dir=None, nlp=None):
             ents_fname = join(ents_dir,
                               splitext(basename(ann_fname))[0] + '_ents.pkl')
             print('writing ' + ents_fname)
-            dump(entities, open(ents_fname, 'wb'))
+            pickle.dump(entities, open(ents_fname, 'wb'))
         else:
             # Save ents in doc
             # FIXME: this currently fails with KeyError!
