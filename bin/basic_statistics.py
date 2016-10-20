@@ -131,12 +131,45 @@ for f,entities in relations.items():
 
 # order list of files and their entities by first character number within each file
 freq_entities = []
+# create list of the entities strings
+list_strings =[]
 for f,entities in embeddings_entities.items(): 
     #print f,entities
     #S0021999114008523.ann [['T1', ['Task', '1212', '1279'], 'multiscale systems comprising an arbitrary number of coupled models'], ['T2', ['Process', '2', '50'], 'multi-physics description of a multiscale system'], ['T3', ['Process', '77', '91'], '\xe2\x80\x98hybrid\xe2\x80\x99 model'], ['T4', ['Process', '122', '128'], 'hybrid'], ['T5', ['Process', '140', '159'], 'molecular treatment'], ['T6', ['Process', '163', '176'], '\xe2\x80\x98micro\xe2\x80\x99 model'], ['T7', ['Process', '185', '204'], 'continuum-fluid one'], ['T8', ['Process', '209', '221'], 'macro\xe2\x80\x99 model'], ['T9', ['Process', '322', '344'], 'micro and macro models'], ['T10', ['Process', '953', '993'], 'time-stepping method for coupled systems'], ['T11', ['Process', '1057', '1080'], 'continuous asynchronous'], ['T12', ['Process', '1082', '1084'], 'CA'], ['T13', ['Process', '1117', '1139'], 'micro and macro models'], ['T14', ['Process', '668', '683'], 'scale-separated'], ['T15', ['Process', '688', '739'], 'physical (as distinct from numerical) approximation'], ['T16', ['Material', '96', '101'], 'fluid'], ['T17', ['Task', '240', '310'], 'obtaining the accuracy of the former with the efficiency of the latter'], ['T18', ['Task', '96', '110'], 'fluid dynamics'], ['T19', ['Process', '769', '783'], 'coupled models'], ['T20', ['Process', '1265', '1279'], 'coupled models']]    
     entities.sort(key=lambda x: int(x[1][1]))
     freq_entities.append(len(entities))
+    for e in entities:
+        list_strings.append(e[2])
 
+
+
+## GET DICTIONARY OF STRINGS OF ENTITIES
+
+# Given a list of words, return a dictionary of
+# word-frequency pairs.
+def wordListToFreqDict(wordlist):
+    wordfreq = [wordlist.count(p) for p in wordlist]
+    return dict(zip(wordlist,wordfreq))
+
+# Sort a dictionary of word-frequency pairs in
+# order of descending frequency.
+
+def sortFreqDict(freqdict):
+    aux = [(freqdict[key], key) for key in freqdict]
+    aux.sort()
+    aux.reverse()
+    return aux
+
+
+dict_freq_entities = wordListToFreqDict(list_strings)
+ordered_dict = sortFreqDict(dict_freq_entities)
+
+outf_dict = open("freq_dict.txt", "w")
+for freq,ent in ordered_dict:
+    print freq,ent
+    outf_dict.write(str(freq) + "\t" + str(ent) + "\n")
+
+outf_dict.close()
 
 # BASIC STATISTICS ABOUT FILES
 print "................................................"
