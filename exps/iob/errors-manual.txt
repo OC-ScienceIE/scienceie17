@@ -10,39 +10,26 @@ TRAIN DATA
 
 == 1
 
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0032386114008428.spacy
-
-BRAT SPAN:    poly
-SPACY SPAN:   
-SPACY TOKENS: ['groups', 'into', 'a', 'poly(butyl', 'methacrylate', '-']
-
-BRAT SPAN:    butyl methacrylate-co-hydroxyehtyl acrylate-co-ethyl acrylate
-SPACY SPAN:   poly(butyl methacrylate-co-hydroxyehtyl acrylate-co-ethyl acrylate
-SPACY TOKENS: ['groups', 'into', 'a', 'poly(butyl', 'methacrylate', '-', 'co', '-', 'hydroxyehtyl', 'acrylate', '-', 'co', '-', 'ethyl', 'acrylate', ')', 'random', 'copolymer']
-
-== 2
-
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0045782515001899.spacy
-BRAT SPAN:    shape a piecewise-polynomial solution over each local discrete cell
-SPACY SPAN:   principles–shape a piecewise-polynomial solution over each local discrete cell
-SPACY TOKENS: ['to–inherently', 'from', 'conservation', 'principles–shape', 'a', 'piecewise', '-', 'polynomial', 'solution', 'over', 'each', 'local', 'discrete', 'cell', ',', 'via', 'local']
-
-
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0098300413002951.spacy
+
 BRAT SPAN:    ossil mass occurrences
 SPACY SPAN:   fossil mass occurrences
 SPACY TOKENS: ['topmost', 'surface', 'of', 'fossil', 'mass', 'occurrences', ',', 'deposited', 'directly']
 
-== 3
+
+== 2
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0167931712003012.spacy
+
 BRAT SPAN:    aked for 2min at temperatures of up to 330°C
 SPACY SPAN:   baked for 2min at temperatures of up to
 SPACY TOKENS: ['the', 'film', 'was', 'baked', 'for', '2min', 'at', 'temperatures', 'of', 'up', 'to', '330°C.', 'In', 'order']
 
-== 4
+
+== 3
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0167931713005042.spacy
+
 Oh no! Malformed annotation:
 T6	Task 400 436;437 453	Nanofeature stamps were then created from the samples
 
@@ -50,19 +37,41 @@ BRAT SPAN:    EBL and HSQ development, t
 SPACY SPAN:   EBL and HSQ development,
 SPACY TOKENS: ['pillars', '.', 'After', 'EBL', 'and', 'HSQ', 'development', ',', 'the', 'HSQ', 'was']
 
-== 5
+
+== 4
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0168365913008766.spacy
+
 BRAT SPAN:    e development of cancer therapy
 SPACY SPAN:   the development of cancer therapy
 SPACY TOKENS: [']', 'and', 'in', 'the', 'development', 'of', 'cancer', 'therapy', '[', '27', ']']
 
+
+== 5
+
+reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370157314001318.spacy
+
+BRAT SPAN:    deterministic 
+SPACY SPAN:   deterministic
+SPACY TOKENS: ['in', 'both', 'the', 'deterministic', '\xa0 ', '[', '10']
+
+BRAT SPAN:    stochastic 
+SPACY SPAN:   stochastic
+SPACY TOKENS: [']', 'and', 'the', 'stochastic', '\xa0 ', '[', '11']
+
+BRAT SPAN:    heart rate variability 
+SPACY SPAN:   heart rate variability
+SPACY TOKENS: ['useful', 'in', 'analysing', 'heart', 'rate', 'variability', '\xa0 ', '[', '12']
+
+
 == 6
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370269304006768.spacy
+
 BRAT SPAN:    nfinite derivative expansion
 SPACY SPAN:   infinite derivative expansion
 SPACY TOKENS: ['terms', 'of', 'an', 'infinite', 'derivative', 'expansion', '.', 'We', 'believe']
+
 
 == 7
 
@@ -72,96 +81,35 @@ BRAT SPAN:    he real part of the top-quark electric dipole moment
 SPACY SPAN:   the real part of the top-quark electric dipole moment
 SPACY TOKENS: ['sensitive', 'also', 'to', 'the', 'real', 'part', 'of', 'the', 'top', '-', 'quark', 'electric', 'dipole', 'moment', ',', 'see', '[']
 
+
 == 8
 
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370269304008305.spacy
-BRAT SPAN:    results of our calculations are compared with very recent experimental results from the FOCUS Collaboratio
-SPACY SPAN:   results of our calculations are compared with very recent experimental results from the FOCUS
-SPACY TOKENS: ['literature', '.', 'The', 'results', 'of', 'our', 'calculations', 'are', 'compared', 'with', 'very', 'recent', 'experimental', 'results', 'from', 'the', 'FOCUS', 'Collaboration', '.', 'The']
-
-== 9
-
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370269304008731.spacy
-BRAT SPAN:    ntroduce a small perturbation to the neutrino mass matrix without breaking Z3 symmetry.
-SPACY SPAN:   introduce a small perturbation to the neutrino mass matrix without breaking Z3 symmetry.
-SPACY TOKENS: ['ντ', ',', 'we', 'introduce', 'a', 'small', 'perturbation', 'to', 'the', 'neutrino', 'mass', 'matrix', 'without', 'breaking', 'Z3', 'symmetry', '.', 'On', 'the', 'other']
-
-BRAT SPAN:    adiative corrections
-SPACY SPAN:   radiative corrections
-SPACY TOKENS: ['be', 'obtained', 'by', 'radiative', 'corrections', '.']
-
-== 10
-
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370269304008780.spacy
-BRAT SPAN:    arameter set HK the 2SC
-SPACY SPAN:   parameter set HK the 2SC
-SPACY TOKENS: [',', 'while', 'for', 'parameter', 'set', 'HK', 'the', '2SC', 'phase', 'survives', 'only']
-
-== 11
-
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370269304008998.spacy
+
 BRAT SPAN:    next-to-next-to-leading orde
 SPACY SPAN:   next-to-next-to-leading
 SPACY TOKENS: ['been', 'calculated', 'in', 'next', '-', 'to', '-', 'next', '-', 'to', '-', 'leading', 'order', '(', 'NNLO']
 
-== 12
 
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370269304009141.spacy
-BRAT SPAN:    exhaustive treatment of the contributions of T-odd distribution function
-SPACY SPAN:   exhaustive treatment of the contributions of T-odd distribution
-SPACY TOKENS: ['analyses', '.', 'An', 'exhaustive', 'treatment', 'of', 'the', 'contributions', 'of', 'T', '-', 'odd', 'distribution', 'functions', 'has', 'not']
-
-== 13
-
-reading /Users/work/Projects/ScienceIE/scienceie17/data/train/S0370269304009189.ann
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370269304009189.spacy
-BRAT SPAN:    an attractive spin–spin interaction between s̄ and the light quarks was incorporated and shown that a stable or narrow positive parity uudds̄ pentaquark can be accommodated within such a mode
-SPACY SPAN:   an attractive spin–spin interaction between s̄ and the light quarks was incorporated and shown that a stable or narrow positive parity uudds̄ pentaquark can be accommodated within such a
-SPACY TOKENS: ['[', '16', ']', 'an', 'attractive', 'spin–spin', 'interaction', 'between', 's̄', 'and', 'the', 'light', 'quarks', 'was', 'incorporated', 'and', 'shown', 'that', 'a', 'stable', 'or', 'narrow', 'positive', 'parity', 'uudds̄', 'pentaquark', 'can', 'be', 'accommodated', 'within', 'such', 'a', 'model', '.', 'This']
-
-== 14
-
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370269304009347.spacy
-BRAT SPAN:    discrete time serie
-SPACY SPAN:   discrete time
-SPACY TOKENS: ['fluctuations', 'δn', 'as', 'discrete', 'time', 'series', '[', '11']
-
-== 15
-
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370269304009359.spacy
-BRAT SPAN:    η′
-SPACY SPAN:   
-SPACY TOKENS: ['η', 'or', '\xa0', 'η′.', 'We', 'therefore']
-
-== 16
-
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S0370269304009803.spacy
-BRAT SPAN:    ow energy current algebra
-SPACY SPAN:   low energy current algebra
-SPACY TOKENS: ['which', 'satisfies', 'the', 'low', 'energy', 'current', 'algebra', '.', 'One', 'consistent']
-
-== 17
+== 9
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S1361841516300342.spacy
+
 BRAT SPAN:    estimate a cost function gradien
 SPACY SPAN:   estimate a cost function
 SPACY TOKENS: ['Carlo', 'sampling', 'to', 'estimate', 'a', 'cost', 'function', 'gradient', '”', '(']
 
-== 18
+
+== 10
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S1364815216303541.spacy
+
 BRAT SPAN:    awn-watering behaviors
 SPACY SPAN:   lawn-watering behaviors
 SPACY TOKENS: ['water', 'cost', ',', 'lawn', '-', 'watering', 'behaviors', ',', 'participation', 'in']
 
-== 19
 
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S2212667813001068.spacy
-BRAT SPAN:    Timur-Coates model
-SPACY SPAN:   Timur-Coates
-SPACY TOKENS: ['Research', ')', 'and', 'Timur', '-', 'Coates', 'models', 'are', 'all']
-
-== 20
+== 11
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S2212667814000070.spacy
 
@@ -169,58 +117,50 @@ BRAT SPAN:    Confidence Mappe
 SPACY SPAN:   Confidence
 SPACY TOKENS: ['Confidence', 'Switch', ',', 'Confidence', 'Mapper', ',', 'Position']
 
-== 21
+
+== 12
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S2212667814000987.spacy
+
 BRAT SPAN:    ntelligent management systems
 SPACY SPAN:   intelligent management systems
 SPACY TOKENS: ['creating', 'and', 'introducing', 'intelligent', 'management', 'systems', 'as', 'one', 'of']
 
-== 22
+
+== 13
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S221266781400121X.spacy
+
 BRAT SPAN:    built on the basis of the text words and a large wordne
 SPACY SPAN:   built on the basis of the text words and a large
 SPACY TOKENS: ['the', 'graphs', 'dynamically', 'built', 'on', 'the', 'basis', 'of', 'the', 'text', 'words', 'and', 'a', 'large', 'wordnet', '.', 'The']
 
-== 23
+
+== 14
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S2212667814001294.spacy
+
 BRAT SPAN:    Role-Based Access Contro
 SPACY SPAN:   Role-Based Access
 SPACY TOKENS: ['proposes', 'an', 'extended', 'Role', '-', 'Based', 'Access', 'Control', '(', 'RBAC']
 
-== 24
 
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S2212667814001476.spacy
-BRAT SPAN:    Cloud Computing provide
-SPACY SPAN:   Cloud Computing
-SPACY TOKENS: ['hosted', 'in', 'a', 'Cloud', 'Computing', 'provider', 'remain', 'hidden']
-
-BRAT SPAN:    unrealistic view of cloud computing securit
-SPACY SPAN:   unrealistic view of cloud computing
-SPACY TOKENS: ['to', 'a', 'totally', 'unrealistic', 'view', 'of', 'cloud', 'computing', 'security', '.', 'Although']
-
-== 25
+== 15
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S2212671612001291.spacy
+
 BRAT SPAN:    real condition
 SPACY SPAN:   real
 SPACY TOKENS: ['was', 'realized', 'under', 'real', 'conditions', 'in', 'foundry']
 
-== 26
+
+== 16
 
 reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S221267161200162X.spacy
+
 BRAT SPAN:    linear autoregressive mode
 SPACY SPAN:   linear autoregressive
 SPACY TOKENS: [',', 'and', 'a', 'linear', 'autoregressive', 'model', 'is', 'used']
-
-== 27
-
-reading /Users/work/Projects/ScienceIE/scienceie17/_local/train/spacy/S2212671612002302.spacy
-BRAT SPAN:    rail-head extrados wea
-SPACY SPAN:   rail-head extrados
-SPACY TOKENS: ['state', 'of', 'the', 'rail', '-', 'head', 'extrados', 'wear', '.']
 
 
 
