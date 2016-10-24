@@ -11,7 +11,4 @@ T10	Material 376 388	information”
 T11	Material 402 437	high-resolution photographic images
 T12	Material 441 447	tracks
 T13	Process 455 474	specific algorithms
-T14	Process 501 524	exact geometric profile
 T15	Material 532 537	rails
-*	Synonym-of T8 T15
-T16	Process 580 602	rail-head extrados wea

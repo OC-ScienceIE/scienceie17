@@ -13,3 +13,4 @@ T10	Material 964 973	GT graphs
 T11	Process 1055 1067	gluing stage
 T12	Material 150 155	graph
 T13	Process 791 831	increasing degree of phase damping noise
+R2	Hyponym-of Arg1:T4 Arg2:T12	

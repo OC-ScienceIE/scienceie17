@@ -1,7 +1,7 @@
 T1	Process 61 76	rationalization
 T2	Material 92 100	supplies
 T3	Process 195 213	reducing the costs
-T4	Material 305 317	case studies
+T4	Task 305 317	case studies
 T5	Process 319 343	automation of procedures
 T6	Process 483 499	web-based models
 T7	Process 564 599	generation of value of supply chain

@@ -14,3 +14,5 @@ T12	Material 1089 1111	semiclathrate hydrates
 T13	Material 1145 1163	clathrate hydrates
 T14	Material 1272 1290	clathrate hydrates
 T15	Material 1376 1398	semiclathrate hydrates
+T16	Material 409 430	semiclathrate hydrate
+T17	Process 1248 1268	thermal conductivity

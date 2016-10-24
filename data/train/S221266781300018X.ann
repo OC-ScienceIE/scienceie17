@@ -10,7 +10,7 @@ T8	Process 105 124	interact with users
 T9	Process 138 154	logical formulas
 T10	Process 185 209	control-flow constraints
 T11	Process 214 239	state/output/action rules
-T12	Process 529 550	reducing Web services
-T13	Process 554 583	data-centric Web applications
+T12	Process 529 583	reducing Web services to data-centric Web applications
+T13	Task 554 583	data-centric Web applications
 T14	Process 669 685	Web applications
 T15	Process 33 58	data-centric Web services

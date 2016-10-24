@@ -4,5 +4,8 @@ T3	Process 217 239	field strength is zero
 T5	Process 244 271	tuning the background field
 T6	Task 273 312	phase-shifts at any (but small) momenta
 T7	Process 334 380	measuring the shift of the ground state energy
-T8	Process 382 395	Lattice sizes
+T8	Material 382 395	Lattice sizes
 T9	Task 442 469	calculation of phase shifts
+T4	Process 28 51	lattice QCD computation
+T10	Process 55 94	nucleon–nucleon low-energy interactions
+T11	Process 111 125	simulating QCD

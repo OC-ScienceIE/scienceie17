@@ -17,3 +17,7 @@ T14	Process 715 730	obtained values
 T15	Process 807 847	relativistic corrections are quite large
 T16	Process 894 909	use this method
 T17	Task 913 950	predict the values of decay constants
+T18	Material 665 676	heavy quark
+T19	Material 686 697	heavy meson
+T20	Material 954 966	heavy mesons
+T21	Process 604 617	wave function

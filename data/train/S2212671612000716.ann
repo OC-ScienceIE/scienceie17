@@ -4,20 +4,16 @@ T3	Material 81 102	two-dimensional space
 T4	Task 108 210	description mode of object-orientation-based direction relation in three-dimensional space is proposed
 T5	Process 108 124	description mode
 T6	Process 246 262	direction region
-T7	Task 266 273	modeled
 T8	Material 280 290	open shape
 T9	Process 296 307	computation
 T10	Material 323 337	world boundary
 T11	Process 341 365	spatial direction region
-T12	Task 341 379	spatial direction region is eliminated
 T13	Process 389 427	processing of the direction predicates
 T14	Process 450 486	processing of topological operations
 T15	Material 495 506	open shapes
 T16	Material 518 534	geometry objects
 T17	Process 540 576	algorithms of topological operations
 T18	Material 585 596	open shapes
-*	Synonym-of T15 T18
 T19	Material 608 624	geometry objects
-*	Synonym-of T16 T19
 T20	Task 647 719	theoretical proof for the correctness and completeness of the algorithms
 T21	Process 709 719	algorithms

@@ -1,7 +1,8 @@
 #!/usr/bin/python
+# by Mattew Peters, who spotted that sklearn does macro averaging not micro averaging correctly and changed it
 
 import os
-from sklearn.metrics import classification_report
+from sklearn.metrics import precision_recall_fscore_support
 import sys
 
 def calculateMeasures(folder_gold="data/dev/", folder_pred="data_pred/dev/", remove_anno = ""):
@@ -45,8 +46,6 @@ def calculateMeasures(folder_gold="data/dev/", folder_pred="data_pred/dev/", rem
             else:
                 # those are the false positives, contained in pred but not gold
                 res_all_gold.append("NONE")
-                if not "NONE" in targets:
-                    targets.append("NONE")
 
             if r in spans_pred:
                 target_pred = res_pred[spans_pred.index(r)].split(" ")[0]
@@ -57,7 +56,61 @@ def calculateMeasures(folder_gold="data/dev/", folder_pred="data_pred/dev/", rem
 
 
     #y_true, y_pred, labels, targets
-    print(classification_report(res_all_gold, res_all_pred, targets))
+    prec, recall, f1, support = precision_recall_fscore_support(
+        res_all_gold, res_all_pred, labels=targets, average=None)
+    # unpack the precision, recall, f1 and support
+    metrics = {}
+    for k, target in enumerate(targets):
+        metrics[target] = {
+            'precision': prec[k],
+            'recall': recall[k],
+            'f1-score': f1[k],
+            'support': support[k]
+        }
+
+    # now micro-averaged
+    if remove_anno != 'types':
+        prec, recall, f1, s = precision_recall_fscore_support(
+            res_all_gold, res_all_pred, labels=targets, average='micro')
+        metrics['overall'] = {
+            'precision': prec,
+            'recall': recall,
+            'f1-score': f1,
+            'support': sum(support)
+        }
+    else:
+        # just binary classification, nothing to average
+        metrics['overall'] = metrics['KEYPHRASE-NOTYPES']
+
+    print_report(metrics, targets)
+    return metrics
+
+
+def print_report(metrics, targets, digits=2):
+    def _get_line(results, target, columns):
+        line = [target]
+        for column in columns[:-1]:
+            line.append("{0:0.{1}f}".format(results[column], digits))
+        line.append("%s" % results[columns[-1]])
+        return line
+
+    columns = ['precision', 'recall', 'f1-score', 'support']
+
+    fmt = '%11s' + '%9s' * 4 + '\n'
+    report = [fmt % tuple([''] + columns)]
+    report.append('\n')
+    for target in targets:
+        results = metrics[target]
+        line = _get_line(results, target, columns)
+        report.append(fmt % tuple(line))
+    report.append('\n')
+
+    # overall
+    line = _get_line(metrics['overall'], 'avg / total', columns)
+    report.append(fmt % tuple(line))
+    report.append('\n')
+
+    print(''.join(report))
 
 
 def normaliseAnnotations(file_anno, remove_anno):

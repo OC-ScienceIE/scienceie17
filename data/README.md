@@ -5,6 +5,8 @@ Please contact the task organisers on the ScienceIE mailing list (scienceie@goog
 
 Scripts contained are eval.py, for evaluating performance on the task, and util.py, for reading parsing ScienceDirect .xml files
 
+Update (20 October 2016): the eval.py script now performs micro averaging, not macro averaging as before, and does not print metrics for "none" anymore. Thanks to Matthew Peters (AI2) for spotting this and improving the script!
+
 ##Requirements:
 * Python 3
 * sklearn

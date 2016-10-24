@@ -17,3 +17,14 @@ T14	Task 1331 1412	derive additional conditions which guarantee the regularity o
 T15	Task 1429 1458	present a modification scheme
 T16	Process 1467 1493	discretized function space
 T17	Process 1639 1652	parameterized
+T18	Process 122 132	CAD models
+T19	Process 92 118	NURBS-based representation
+R2	Hyponym-of Arg1:T3 Arg2:T4	
+T20	Material 198 211	NURBS objects
+T21	Material 92 97	NURBS
+T22	Material 373 387	NURBS surfaces
+T23	Material 392 405	NURBS volumes
+T24	Material 844 849	NURBS
+T25	Process 844 865	NURBS basis functions
+T26	Material 1284 1289	NURBS
+T27	Process 1439 1458	modification scheme

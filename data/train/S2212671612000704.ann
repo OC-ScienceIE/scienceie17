@@ -1,11 +1,8 @@
-T1	Process 4 8	load
 T2	Material 12 29	beam pumping unit
-T3	Process 65 84	state of light load
-T4	Material 105 112	voltage
-T5	Task 117 181	improve the power factor and efficiency of the beam pumping unit
+T3	Process 74 84	light load
+T5	Process 117 181	improve the power factor and efficiency of the beam pumping unit
 T6	Process 164 181	beam pumping unit
 T7	Process 190 200	light load
-T8	Material 220 227	voltage
 T9	Process 209 227	change the voltage
 T10	Process 231 267	changing the thyristor trigger angle
 T11	Process 303 355	analyze the change of the cycles of the load overall
@@ -18,4 +15,7 @@ T17	Task 524 555	calculated by genetic algorithm
 T18	Process 538 555	genetic algorithm
 T19	Process 587 602	optimal voltage
 T20	Process 619 657	whole optimal voltage changeable rule.
-T21	Process 689 702	energy saving
+T21	Task 689 702	energy saving
+T1	Process 12 24	beam pumping
+T4	Process 86 112	Reducing a certain voltage
+T8	Material 244 267	thyristor trigger angle

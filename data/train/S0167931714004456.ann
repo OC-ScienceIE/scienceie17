@@ -26,3 +26,5 @@ T23	Material 731 744	microfluidics
 T24	Material 720 724	PDMS
 T25	Process 903 924	fabrication technique
 R1	Hyponym-of Arg1:T14 Arg2:T25	
+T26	Material 805 815	prepolymer
+T27	Material 875 879	PDMS

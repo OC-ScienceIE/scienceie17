@@ -19,3 +19,5 @@ T18	Process 898 906	infected
 T19	Process 1051 1061	visualized
 T20	Task 994 1013	luciferase activity
 T21	Material 1017 1046	retrovirally-transduced cells
+T22	Material 445 452	SL[DXR]
+R1	Hyponym-of Arg1:T22 Arg2:T8	

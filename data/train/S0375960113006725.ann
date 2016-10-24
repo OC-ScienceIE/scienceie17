@@ -13,3 +13,10 @@ T4	Material 667 681	maser clusters
 T5	Material 711 723	neutron star
 T10	Process 767 797	radiation dilution coefficient
 T12	Process 0 12	Observations
+T13	Material 132 140	OH lines
+T14	Material 164 167	H2O
+T15	Material 906 919	hydrogen line
+T16	Process 199 217	emission mechanism
+R1	Hyponym-of Arg1:T1 Arg2:T16	
+R2	Hyponym-of Arg1:T2 Arg2:T16	
+R3	Hyponym-of Arg1:T3 Arg2:T16	
