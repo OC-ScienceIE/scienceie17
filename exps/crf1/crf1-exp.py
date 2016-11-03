@@ -17,7 +17,7 @@ from sie.feats import generate_feats, features1
 spacy_dir = join(LOCAL_DIR, 'train', 'spacy')
 feats_dir = join('_train', 'features1')
 
-generate_feats(spacy_dir, feats_dir, features1)
+# generate_feats(spacy_dir, feats_dir, features1)
 
 # Step 2: Collect data for running CRF classifier
 
@@ -25,7 +25,7 @@ iob_dir = join(LOCAL_DIR, 'train', 'iob')
 data = collect_crf_data(iob_dir, feats_dir)
 
 # Step 3: Run CRF classifier
-crf = CRF()
+crf = CRF(c1=0.1, c2=0.1, all_possible_transitions=True)
 
 for ent in ENTITIES:
     crf.fit(data['feats'], data[ent])

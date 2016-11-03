@@ -24,7 +24,7 @@ feats_dir = join('_train', 'features1')
 
 # If you want to save time by resusing feats from crf1-exp/py,
 # comment out the line below:
-generate_feats(spacy_dir, feats_dir, features1)
+#generate_feats(spacy_dir, feats_dir, features1)
 
 # Step 2: Collect data for running CRF classifier
 
@@ -44,7 +44,7 @@ splits = list(
     group_k_fold.split(data['feats'], data['Material'], data['filenames']))
 
 # Step 4: Run CRF classifier
-crf = CRF()
+crf = CRF(c1=0.1, c2=0.1, all_possible_transitions=True)
 pred = {}
 
 for ent in ENTITIES:
