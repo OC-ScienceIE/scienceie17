@@ -22,7 +22,7 @@ def collect_crf_data(iob_dir, *feat_dirs):
         text_iob = json.load(open(iob_fname))
 
         filename = basename(iob_fname)
-        feat_filenames = [join(dir, filename)  for dir in feat_dirs]
+        feat_filenames = [join(dir, filename) for dir in feat_dirs]
         text_feat = Features.from_file(*feat_filenames)
         assert len(text_iob) == len(text_feat)
         data['feats'] += text_feat
@@ -54,11 +54,12 @@ def pred_to_iob(pred, filenames, true_iob_dir, pred_iob_dir):
     true_iob_dir: directory for annotated IOB tags
     pred_iob_dir: directory for predicted IOB tags
     """
+
     def write_pred_iob():
         pred_iob_fname = join(pred_iob_dir, prev_iob_fname)
         with open(pred_iob_fname, 'w') as outf:
             print('writing ' + pred_iob_fname)
-            json.dump(true_iob, outf, indent=4, sort_keys=True)
+            json.dump(true_iob, outf, indent=4, sort_keys=True, ensure_ascii=False)
 
     makedirs(pred_iob_dir, exist_ok=True)
     prev_iob_fname = None

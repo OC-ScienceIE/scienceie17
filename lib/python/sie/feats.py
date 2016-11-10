@@ -37,7 +37,7 @@ class Features(list):
         write features to json file(s)
         """
         print('writing features to ' + filename)
-        json.dump(self, open(filename, 'w'), **kwargs)
+        json.dump(self, open(filename, 'w'), indent=4, sort_keys=True, ensure_ascii=False, **kwargs)
 
     def update(self, other):
         """

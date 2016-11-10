@@ -119,7 +119,7 @@ def write_iob_file(iob_fname, doc, iob_tags):
 
     with open(iob_fname, 'w') as outf:
         print('writing ' + iob_fname)
-        json.dump(doc_iob, outf, indent=4, sort_keys=True)
+        json.dump(doc_iob, outf, indent=4, sort_keys=True, ensure_ascii=False)
 
 
 def map_chars_to_tokens(doc):
