@@ -71,7 +71,7 @@ def generate_feats(spacy_dir, feat_dir, feat_func):
 
         text_feats = Features([feat_func(sent) for sent in doc.sents])
 
-        text_feats.to_file(feat_fname, indent=2, sort_keys=True)
+        text_feats.to_file(feat_fname)
 
 
 def features1(sent, context_size=2, undefined='__'):
