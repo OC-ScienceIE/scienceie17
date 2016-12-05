@@ -52,7 +52,7 @@ def get_text_spans(iob_fname):
                     # open new span
                     begin = token_iob['begin']
 
-            if False and begin:
+            if begin:
                 # there is still an open span when last tag is B
                 end = sent_iob[-1]['end']
                 span = Span(label, begin, end)
