@@ -12,7 +12,7 @@ def collect_crf_data(iob_dir, *feat_dirs):
     Collect the data to train/eval CRF classifier.
     Labels for entities are derived from IOB tags in the files in the iob_dir.
     Features are collected from the json files in one or more feat_dir.
-    Filenames are the basenames are the iob files.
+    Filenames are the basenames of the iob files.
     """
     data = dict((label, list()) for label in ENTITIES)
     data['feats'] = []
