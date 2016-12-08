@@ -99,7 +99,7 @@ def print_report(metrics, targets, digits=2):
     fmt = '%11s' + '%9s' * 4 + '\n'
     report = [fmt % tuple([''] + columns)]
     report.append('\n')
-    for target in targets:
+    for target in sorted(targets):
         results = metrics[target]
         line = _get_line(results, target, columns)
         report.append(fmt % tuple(line))
