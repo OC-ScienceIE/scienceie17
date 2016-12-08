@@ -3,6 +3,8 @@ from glob import glob
 from os.path import join, basename
 from os import makedirs
 
+from sklearn_crfsuite import CRF
+
 from sie import ENTITIES
 from sie.feats import Features
 
@@ -80,3 +82,28 @@ def pred_to_iob(pred, filenames, true_iob_dir, pred_iob_dir):
                 token_iob[ent] = pred[ent][sent_count][token_count]
 
     write_pred_iob()
+
+
+
+class PruneCRF(CRF):
+    """
+    CRF that prunes training sentences without entities (that is, no I or B labels)
+
+    Would be natural to implement this in a Pipeline, but sklearn currently does not support changing the size of y.
+    Cf. https://github.com/scikit-learn/scikit-learn/issues/3855
+    """
+
+    def fit(self, X, y):
+        Xp, yp = self.prune(X, y)
+        return CRF.fit(self, Xp, yp)
+
+    def prune(self, X, y):
+        Xp, yp = [], []
+
+        for xs, ys  in zip(X, y):
+            if any(l != 'O' for l in ys):
+                Xp.append(xs)
+                yp.append(ys)
+
+        print('pruned from {} to {} sentences'.format(len(y), len(yp)))
+        return Xp, yp
