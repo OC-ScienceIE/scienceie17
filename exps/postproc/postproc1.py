@@ -116,7 +116,8 @@ def all_token_labels(in_iob_dir, out_iob_dir):
             json.dump(text_iob, outf, indent=4, sort_keys=True, ensure_ascii=False)
 
 
-in_iob_dir = join(EXPS_DIR, 'wordfeats/_train/iob')
+#in_iob_dir = join(EXPS_DIR, 'wordfeats/_train/iob')
+in_iob_dir = join(EXPS_DIR, 'prune/_train/iob')
 out_iob_dir = '_train/iob'
 
 all_token_labels(in_iob_dir, out_iob_dir)
