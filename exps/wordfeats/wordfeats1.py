@@ -79,7 +79,6 @@ crf = CRF(c1=0.1, c2=0.1, all_possible_transitions=True)
 pred = {}
 
 for ent in ENTITIES:
-    crf.fit(data['feats'], data[ent])
     pred[ent] = cross_val_predict(crf, data['feats'], data[ent], cv=splits)
     # Report scores directly on I and B tags,
     # disregard 'O' because it is by far the most frequent class

@@ -17,7 +17,7 @@ from sie.feats import generate_feats, features1
 spacy_dir = join(LOCAL_DIR, 'train', 'spacy')
 feats_dir = join('_train', 'features1')
 
-# generate_feats(spacy_dir, feats_dir, features1)
+generate_feats(spacy_dir, feats_dir, features1)
 
 # Step 2: Collect data for running CRF classifier
 
