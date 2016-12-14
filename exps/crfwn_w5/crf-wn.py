@@ -179,7 +179,7 @@ def features2(sent, context_size=2, undefined='__'):
 
             if 0 <= k < len(sent):
                 lemma = sent[k].lemma_
-                pos = sent[k].pos_ 
+                pos = sent[k].pos_
                 if re.match(r"VERB|ADJ|NOUN|ADV",pos) and eval("len(wn.synsets(" + repr(lemma) + ", pos=wn." + pos  +"))") >= 1:      
                     wnsynset=eval("str(wn.synsets('" +lemma+ "', pos=wn." + pos  +")[0])")
                 else:

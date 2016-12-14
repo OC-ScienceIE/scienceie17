@@ -265,8 +265,6 @@ def features2(sent, context_size=2, undefined='__'):
             if 0 <= k < len(sent):
                 lemma = sent[k].lemma_
                 pos = sent[k].pos_  
-                #if len(wn.synsets(lemma)) >= 1 and len(wn.synsets(lemma)[0].hypernyms()) >= 1 and len(wn.synsets(lemma)[0].hypernyms()[0].hypernyms()) >= 1: 
-                 #   wnhypernym2 = str(wn.synsets(lemma)[0].hypernyms()[0].hypernyms()[0]) 
                 if re.match(r"VERB|ADJ|NOUN|ADV",pos) and eval("len(wn.synsets(" + repr(lemma) + ", pos=wn." + pos  +"))") >= 1 and eval("len(wn.synsets(" + repr(lemma) + ", pos=wn." + pos  +")[0].hypernyms())") >= 1 and eval("len(wn.synsets(" + repr(lemma) + ", pos=wn." + pos  +")[0].hypernyms()[0].hypernyms())") >= 1:                                     
                     wnhypernym2 = eval("str(wn.synsets(" + repr(lemma)+ ", pos=wn." + pos +")[0].hypernyms()[0].hypernyms()[0])") 
                 else:

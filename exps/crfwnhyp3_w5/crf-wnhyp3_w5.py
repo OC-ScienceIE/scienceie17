@@ -20,11 +20,11 @@ from eval import calculateMeasures
 from nltk.corpus import wordnet as wn
 import re
 
-def features2(sent, context_size=1, undefined='__'):
+def features2(sent, context_size=2, undefined='__'):
     """
-    Example of a feature function which generates, for each token in
-    the sentence, its lemma, POS and third-level hypernym (hypernym of hypernym of a hypernym) of the first Wordnet synset (filtered by POS) as well as that of the 
-    preceding/following token (i.e. window size=3).
+    Example of a simple feature function which generates, for each token in
+    the sentence, its lemma, POS and third-level hypernym (hypernym of hypernym of a hypernym) of the first Wordnet synset (filtered by POS) as well as that of the two
+    preceding/following tokens (i.e. window size=5).
 
     Example:
 
@@ -33,221 +33,188 @@ def features2(sent, context_size=1, undefined='__'):
             "-1:lemma": "__",
             "-1:pos": "__",
             "-1:wnhypernym3": "None",
+            "-2:lemma": "__",
+            "-2:pos": "__",
+            "-2:wnhypernym3": "None",
             "0:lemma": "poor",
             "0:pos": "ADJ",
             "0:wnhypernym3": "None",
             "1:lemma": "oxidation",
             "1:pos": "NOUN",
-            "1:wnhypernym3": "Synset('natural_process.n.01')"
+            "1:wnhypernym3": "Synset('natural_process.n.01')",
+            "2:lemma": "behavior",
+            "2:pos": "NOUN",
+            "2:wnhypernym3": "Synset('event.n.01')"
         },
         {
             "-1:lemma": "poor",
             "-1:pos": "ADJ",
             "-1:wnhypernym3": "None",
+            "-2:lemma": "__",
+            "-2:pos": "__",
+            "-2:wnhypernym3": "None",
             "0:lemma": "oxidation",
             "0:pos": "NOUN",
             "0:wnhypernym3": "Synset('natural_process.n.01')",
             "1:lemma": "behavior",
             "1:pos": "NOUN",
-            "1:wnhypernym3": "Synset('event.n.01')"
+            "1:wnhypernym3": "Synset('event.n.01')",
+            "2:lemma": "be",
+            "2:pos": "VERB",
+            "2:wnhypernym3": "None"
         },
         {
             "-1:lemma": "oxidation",
             "-1:pos": "NOUN",
             "-1:wnhypernym3": "Synset('natural_process.n.01')",
+            "-2:lemma": "poor",
+            "-2:pos": "ADJ",
+            "-2:wnhypernym3": "None",
             "0:lemma": "behavior",
             "0:pos": "NOUN",
             "0:wnhypernym3": "Synset('event.n.01')",
             "1:lemma": "be",
             "1:pos": "VERB",
-            "1:wnhypernym3": "None"
+            "1:wnhypernym3": "None",
+            "2:lemma": "the",
+            "2:pos": "DET",
+            "2:wnhypernym3": "None"
         },
         {
             "-1:lemma": "behavior",
             "-1:pos": "NOUN",
             "-1:wnhypernym3": "Synset('event.n.01')",
+            "-2:lemma": "oxidation",
+            "-2:pos": "NOUN",
+            "-2:wnhypernym3": "Synset('natural_process.n.01')",
             "0:lemma": "be",
             "0:pos": "VERB",
             "0:wnhypernym3": "None",
             "1:lemma": "the",
             "1:pos": "DET",
-            "1:wnhypernym3": "None"
+            "1:wnhypernym3": "None",
+            "2:lemma": "major",
+            "2:pos": "ADJ",
+            "2:wnhypernym3": "None"
         },
         {
             "-1:lemma": "be",
             "-1:pos": "VERB",
             "-1:wnhypernym3": "None",
+            "-2:lemma": "behavior",
+            "-2:pos": "NOUN",
+            "-2:wnhypernym3": "Synset('event.n.01')",
             "0:lemma": "the",
             "0:pos": "DET",
             "0:wnhypernym3": "None",
             "1:lemma": "major",
             "1:pos": "ADJ",
-            "1:wnhypernym3": "None"
+            "1:wnhypernym3": "None",
+            "2:lemma": "barrier",
+            "2:pos": "NOUN",
+            "2:wnhypernym3": "Synset('artifact.n.01')"
         },
         {
             "-1:lemma": "the",
             "-1:pos": "DET",
             "-1:wnhypernym3": "None",
+            "-2:lemma": "be",
+            "-2:pos": "VERB",
+            "-2:wnhypernym3": "None",
             "0:lemma": "major",
             "0:pos": "ADJ",
             "0:wnhypernym3": "None",
             "1:lemma": "barrier",
             "1:pos": "NOUN",
-            "1:wnhypernym3": "Synset('artifact.n.01')"
+            "1:wnhypernym3": "Synset('artifact.n.01')",
+            "2:lemma": "to",
+            "2:pos": "ADP",
+            "2:wnhypernym3": "None"
         },
         {
             "-1:lemma": "major",
             "-1:pos": "ADJ",
             "-1:wnhypernym3": "None",
+            "-2:lemma": "the",
+            "-2:pos": "DET",
+            "-2:wnhypernym3": "None",
             "0:lemma": "barrier",
             "0:pos": "NOUN",
             "0:wnhypernym3": "Synset('artifact.n.01')",
             "1:lemma": "to",
             "1:pos": "ADP",
-            "1:wnhypernym3": "None"
+            "1:wnhypernym3": "None",
+            "2:lemma": "the",
+            "2:pos": "DET",
+            "2:wnhypernym3": "None"
         },
         {
             "-1:lemma": "barrier",
             "-1:pos": "NOUN",
             "-1:wnhypernym3": "Synset('artifact.n.01')",
+            "-2:lemma": "major",
+            "-2:pos": "ADJ",
+            "-2:wnhypernym3": "None",
             "0:lemma": "to",
             "0:pos": "ADP",
             "0:wnhypernym3": "None",
             "1:lemma": "the",
             "1:pos": "DET",
-            "1:wnhypernym3": "None"
+            "1:wnhypernym3": "None",
+            "2:lemma": "increase",
+            "2:pos": "VERB",
+            "2:wnhypernym3": "None"
         },
         {
             "-1:lemma": "to",
             "-1:pos": "ADP",
             "-1:wnhypernym3": "None",
+            "-2:lemma": "barrier",
+            "-2:pos": "NOUN",
+            "-2:wnhypernym3": "Synset('artifact.n.01')",
             "0:lemma": "the",
             "0:pos": "DET",
             "0:wnhypernym3": "None",
             "1:lemma": "increase",
             "1:pos": "VERB",
-            "1:wnhypernym3": "None"
+            "1:wnhypernym3": "None",
+            "2:lemma": "use",
+            "2:pos": "NOUN",
+            "2:wnhypernym3": "Synset('event.n.01')"
         },
         {
             "-1:lemma": "the",
             "-1:pos": "DET",
             "-1:wnhypernym3": "None",
+            "-2:lemma": "to",
+            "-2:pos": "ADP",
+            "-2:wnhypernym3": "None",
             "0:lemma": "increase",
             "0:pos": "VERB",
             "0:wnhypernym3": "None",
             "1:lemma": "use",
             "1:pos": "NOUN",
-            "1:wnhypernym3": "Synset('event.n.01')"
+            "1:wnhypernym3": "Synset('event.n.01')",
+            "2:lemma": "of",
+            "2:pos": "ADP",
+            "2:wnhypernym3": "None"
         },
         {
             "-1:lemma": "increase",
             "-1:pos": "VERB",
             "-1:wnhypernym3": "None",
+            "-2:lemma": "the",
+            "-2:pos": "DET",
+            "-2:wnhypernym3": "None",
             "0:lemma": "use",
             "0:pos": "NOUN",
             "0:wnhypernym3": "Synset('event.n.01')",
             "1:lemma": "of",
             "1:pos": "ADP",
-            "1:wnhypernym3": "None"
-        },
-        {
-            "-1:lemma": "use",
-            "-1:pos": "NOUN",
-            "-1:wnhypernym3": "Synset('event.n.01')",
-            "0:lemma": "of",
-            "0:pos": "ADP",
-            "0:wnhypernym3": "None",
-            "1:lemma": "ti",
-            "1:pos": "PROPN",
-            "1:wnhypernym3": "None"
-        },
-        {
-            "-1:lemma": "of",
-            "-1:pos": "ADP",
-            "-1:wnhypernym3": "None",
-            "0:lemma": "ti",
-            "0:pos": "PROPN",
-            "0:wnhypernym3": "None",
-            "1:lemma": "-",
-            "1:pos": "PUNCT",
-            "1:wnhypernym3": "None"
-        },
-        {
-            "-1:lemma": "ti",
-            "-1:pos": "PROPN",
-            "-1:wnhypernym3": "None",
-            "0:lemma": "-",
-            "0:pos": "PUNCT",
-            "0:wnhypernym3": "None",
-            "1:lemma": "base",
-            "1:pos": "VERB",
-            "1:wnhypernym3": "None"
-        },
-        {
-            "-1:lemma": "-",
-            "-1:pos": "PUNCT",
-            "-1:wnhypernym3": "None",
-            "0:lemma": "base",
-            "0:pos": "VERB",
-            "0:wnhypernym3": "None",
-            "1:lemma": "alloy",
-            "1:pos": "NOUN",
-            "1:wnhypernym3": "Synset('matter.n.03')"
-        },
-        {
-            "-1:lemma": "base",
-            "-1:pos": "VERB",
-            "-1:wnhypernym3": "None",
-            "0:lemma": "alloy",
-            "0:pos": "NOUN",
-            "0:wnhypernym3": "Synset('matter.n.03')",
-            "1:lemma": "in",
-            "1:pos": "ADP",
-            "1:wnhypernym3": "None"
-        },
-        {
-            "-1:lemma": "alloy",
-            "-1:pos": "NOUN",
-            "-1:wnhypernym3": "Synset('matter.n.03')",
-            "0:lemma": "in",
-            "0:pos": "ADP",
-            "0:wnhypernym3": "None",
-            "1:lemma": "high",
-            "1:pos": "ADJ",
-            "1:wnhypernym3": "None"
-        },
-        {
-            "-1:lemma": "in",
-            "-1:pos": "ADP",
-            "-1:wnhypernym3": "None",
-            "0:lemma": "high",
-            "0:pos": "ADJ",
-            "0:wnhypernym3": "None",
-            "1:lemma": "-",
-            "1:pos": "PUNCT",
-            "1:wnhypernym3": "None"
-        },
-        {
-            "-1:lemma": "high",
-            "-1:pos": "ADJ",
-            "-1:wnhypernym3": "None",
-            "0:lemma": "-",
-            "0:pos": "PUNCT",
-            "0:wnhypernym3": "None",
-            "1:lemma": "temperature",
-            "1:pos": "NOUN",
-            "1:wnhypernym3": "Synset('abstraction.n.06')"
-        },
-        {
-            "-1:lemma": "-",
-            "-1:pos": "PUNCT",
-            "-1:wnhypernym3": "None",
-            "0:lemma": "temperature",
-            "0:pos": "NOUN",
-            "0:wnhypernym3": "Synset('abstraction.n.06')",
-            "1:lemma": "structural",
-            "1:pos": "ADJ",
-            "1:wnhypernym3": "None"
+            "1:wnhypernym3": "None",
+            "2:lemma": "ti",
+            "2:pos": "PROPN",
+            "2:wnhypernym3": "None"
         },
       ],
     """
