@@ -20,10 +20,12 @@ from eval import calculateMeasures
 # Function to add WordNet features
 from nltk.corpus import wordnet as wn
 
+import re
+
 def features2(sent, context_size=2, undefined='__'):
     """
     Example of a simple feature function which generates, for each token in
-    the sentence, its lemma, POS and first hypernym of the first Wordnet synset as well as that of the two
+    the sentence, its lemma, POS and first hypernym of the first Wordnet synset (filtered by POS) as well as that of the two
     preceding/following tokens (i.e. window size=5).
 
     Example:
@@ -32,13 +34,13 @@ def features2(sent, context_size=2, undefined='__'):
     {
       "-1:lemma": "__",
       "-1:pos": "__",
-      "-1:wnhypernym": "__",
+      "-1:wnhypernym": "None",
       "-2:lemma": "__",
       "-2:pos": "__",
-      "-2:wnhypernym": "__",
+      "-2:wnhypernym": "None",
       "0:lemma": "poor",
       "0:pos": "ADJ",
-      "0:wnhypernym": "Synset('people.n.01')",
+      "0:wnhypernym": "None",
       "1:lemma": "oxidation",
       "1:pos": "NOUN",
       "1:wnhypernym": "Synset('chemical_reaction.n.01')",
@@ -49,10 +51,10 @@ def features2(sent, context_size=2, undefined='__'):
     {
       "-1:lemma": "poor",
       "-1:pos": "ADJ",
-      "-1:wnhypernym": "Synset('people.n.01')",
+      "-1:wnhypernym": "None",
       "-2:lemma": "__",
       "-2:pos": "__",
-      "-2:wnhypernym": "__",
+      "-2:wnhypernym": "None",
       "0:lemma": "oxidation",
       "0:pos": "NOUN",
       "0:wnhypernym": "Synset('chemical_reaction.n.01')",
@@ -61,7 +63,7 @@ def features2(sent, context_size=2, undefined='__'):
       "1:wnhypernym": "Synset('activity.n.01')",
       "2:lemma": "be",
       "2:pos": "VERB",
-      "2:wnhypernym": "Synset('metallic_element.n.01')"
+      "2:wnhypernym": "None"
     },
     {
       "-1:lemma": "oxidation",
@@ -69,16 +71,16 @@ def features2(sent, context_size=2, undefined='__'):
       "-1:wnhypernym": "Synset('chemical_reaction.n.01')",
       "-2:lemma": "poor",
       "-2:pos": "ADJ",
-      "-2:wnhypernym": "Synset('people.n.01')",
+      "-2:wnhypernym": "None",
       "0:lemma": "behavior",
       "0:pos": "NOUN",
       "0:wnhypernym": "Synset('activity.n.01')",
       "1:lemma": "be",
       "1:pos": "VERB",
-      "1:wnhypernym": "Synset('metallic_element.n.01')",
+      "1:wnhypernym": "None",
       "2:lemma": "the",
       "2:pos": "DET",
-      "2:wnhypernym": "Synset('metallic_element.n.01')"
+      "2:wnhypernym": "None"
     },
     {
       "-1:lemma": "behavior",
@@ -89,13 +91,64 @@ def features2(sent, context_size=2, undefined='__'):
       "-2:wnhypernym": "Synset('chemical_reaction.n.01')",
       "0:lemma": "be",
       "0:pos": "VERB",
-      "0:wnhypernym": "Synset('metallic_element.n.01')",
+      "0:wnhypernym": "None",
       "1:lemma": "the",
       "1:pos": "DET",
-      "1:wnhypernym": "Synset('metallic_element.n.01')",
+      "1:wnhypernym": "None",
       "2:lemma": "major",
       "2:pos": "ADJ",
-      "2:wnhypernym": "Synset('commissioned_military_officer.n.01')"
+      "2:wnhypernym": "None"
+    },
+    {
+      "-1:lemma": "be",
+      "-1:pos": "VERB",
+      "-1:wnhypernym": "None",
+      "-2:lemma": "behavior",
+      "-2:pos": "NOUN",
+      "-2:wnhypernym": "Synset('activity.n.01')",
+      "0:lemma": "the",
+      "0:pos": "DET",
+      "0:wnhypernym": "None",
+      "1:lemma": "major",
+      "1:pos": "ADJ",
+      "1:wnhypernym": "None",
+      "2:lemma": "barrier",
+      "2:pos": "NOUN",
+      "2:wnhypernym": "Synset('obstruction.n.01')"
+    },
+    {
+      "-1:lemma": "the",
+      "-1:pos": "DET",
+      "-1:wnhypernym": "None",
+      "-2:lemma": "be",
+      "-2:pos": "VERB",
+      "-2:wnhypernym": "None",
+      "0:lemma": "major",
+      "0:pos": "ADJ",
+      "0:wnhypernym": "None",
+      "1:lemma": "barrier",
+      "1:pos": "NOUN",
+      "1:wnhypernym": "Synset('obstruction.n.01')",
+      "2:lemma": "to",
+      "2:pos": "ADP",
+      "2:wnhypernym": "None"
+    },
+    {
+      "-1:lemma": "major",
+      "-1:pos": "ADJ",
+      "-1:wnhypernym": "None",
+      "-2:lemma": "the",
+      "-2:pos": "DET",
+      "-2:wnhypernym": "None",
+      "0:lemma": "barrier",
+      "0:pos": "NOUN",
+      "0:wnhypernym": "Synset('obstruction.n.01')",
+      "1:lemma": "to",
+      "1:pos": "ADP",
+      "1:wnhypernym": "None",
+      "2:lemma": "the",
+      "2:pos": "DET",
+      "2:wnhypernym": "None"
     },
 
       ],
@@ -112,10 +165,17 @@ def features2(sent, context_size=2, undefined='__'):
             if 0 <= k < len(sent):
                 lemma = sent[k].lemma_
                 pos = sent[k].pos_  
-                if len(wn.synsets(lemma)) >= 1 and len(wn.synsets(lemma)[0].hypernyms()) >= 1: 
-                    wnhypernym = str(wn.synsets(lemma)[0].hypernyms()[0])          
+                #if len(wn.synsets(lemma)) >= 1 and len(wn.synsets(lemma)[0].hypernyms()) >= 1: 
+                #if len(wn.synsets(lemma)) >= 1 and len(wn.synsets(lemma)[0].hypernyms()) >= 1: 
+                if re.match(r"VERB|ADJ|NOUN|ADV",pos) and eval("len(wn.synsets(" + repr(lemma) + ", pos=wn." + pos  +"))") >= 1 and eval("len(wn.synsets(" + repr(lemma) + ", pos=wn." + pos  +")[0].hypernyms())") >= 1 :                      
+                    #wnhypernym = str(wn.synsets(lemma)[0].hypernyms()[0]) 
+                    wnhypernym = eval("str(wn.synsets(" + repr(lemma)+ ", pos=wn." + pos  +")[0].hypernyms()[0])")
+                   
+                else:
+                    wnhypernym = "None"         
             else:
-                lemma = pos = wnhypernym = undefined
+                lemma = pos = undefined
+                wnhypernym = "None"
                 
 
             token_feats['{}:lemma'.format(j)] = lemma
