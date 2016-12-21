@@ -24,7 +24,7 @@ feats_dir = join('_train', 'features1')
 
 # If you want to save time by resusing feats from crf1-exp/py,
 # comment out the line below:
-#generate_feats(spacy_dir, feats_dir, features1)
+generate_feats(spacy_dir, feats_dir, features1)
 
 # Step 2: Collect data for running CRF classifier
 

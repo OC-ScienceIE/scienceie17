@@ -41,7 +41,7 @@ def get_text_spans(iob_fname):
             for i, token_iob in enumerate(sent_iob):
                 tag = token_iob[label]
 
-                if begin and tag in 'OB':
+                if begin is not None and tag in 'OB':
                     # close open span
                     end = sent_iob[i - 1]['end']
                     span = Span(label, begin, end)
@@ -52,7 +52,7 @@ def get_text_spans(iob_fname):
                     # open new span
                     begin = token_iob['begin']
 
-            if begin:
+            if begin is not None:
                 # there is still an open span when last tag is B
                 end = sent_iob[-1]['end']
                 span = Span(label, begin, end)
