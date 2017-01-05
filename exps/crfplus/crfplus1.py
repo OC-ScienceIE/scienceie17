@@ -56,12 +56,12 @@ def convert(crfplus_dirs, true_iob_dir, pred_iob_dir):
 
 # Step 1: Convert CFR++ output to IOB tags in Json format
 true_iob_dir = join(LOCAL_DIR, 'train/iob')
-pred_iob_dir = 'entityOp_Utpal/iob'
+pred_iob_dir = '_entityOp_Utpal/iob'
 
 crfplus_dirs = {
-    'Material': 'entityOp_Utpal/materialOp',
-    'Process': 'entityOp_Utpal/processOp',
-    'Task': 'entityOp_Utpal/taskOp'
+    'Material': '_entityOp_Utpal/materialOp',
+    'Process': '_entityOp_Utpal/processOp',
+    'Task': '_entityOp_Utpal/taskOp'
 }
 
 convert(
@@ -73,7 +73,7 @@ convert(
 
 # Step 2: Convert predicted IOB tags to predicted Brat annotations
 true_brat_dir = join(DATA_DIR, 'train')
-pred_brat_dir = 'entityOp_Utpal/brat'
+pred_brat_dir = '_entityOp_Utpal/brat'
 
 iob_to_brat(pred_iob_dir, true_brat_dir, pred_brat_dir)
 
