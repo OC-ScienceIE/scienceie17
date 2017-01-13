@@ -15,7 +15,7 @@ from sie import DATA_DIR, LOCAL_DIR
 from sie.spacynlp import run_nlp, generate_iob_tags
 
 # TODO: preproc test data once available
-data_parts = 'train', 'dev'  # , 'test'
+data_parts = 'train', 'dev', 'test'
 
 for part in data_parts:
     part_dir = join(DATA_DIR, part)

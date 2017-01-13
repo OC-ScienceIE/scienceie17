@@ -3,7 +3,7 @@ NLP processing of annotated data with Spacy
 """
 
 from glob import glob
-from os.path import join, splitext, basename
+from os.path import join, splitext, basename, exists
 from os import makedirs
 import pickle
 import json
@@ -46,18 +46,18 @@ def generate_iob_tags(ann_dir, spacy_dir, iob_dir, nlp=None):
     Spacy serialized analyses in spacy_dir, writing to output files to iob_dir
     """
     #TODO This does not correctly handle embedded entities of the same type!
-    # E.g. Material inside anotehr Material
+    # E.g. Material inside another Material
 
     if not nlp:
         nlp = spacy.load('en')
 
     makedirs(iob_dir, exist_ok=True)
     correct = incorrect = 0
+    txt_count = ann_count = iob_count = 0
 
-    for ann_fname in glob(join(ann_dir, '*.ann')):
-        print('reading ' + ann_fname)
-        spacy_fname = join(spacy_dir,
-                           splitext(basename(ann_fname))[0] + '.spacy')
+    for txt_fname in glob(join(ann_dir, '*.txt')):
+        txt_count += 1
+        spacy_fname = join(spacy_dir, splitext(basename(txt_fname))[0] + '.spacy')
         doc = read_doc(spacy_fname, nlp)
         char2token = map_chars_to_tokens(doc)
 
@@ -65,39 +65,49 @@ def generate_iob_tags(ann_dir, spacy_dir, iob_dir, nlp=None):
         for label in ENTITIES:
             iob_tags[label] = len(doc) * ['O']
 
-        for line in open(ann_fname):
-            if line.startswith('T'):
-                try:
-                    label, begin_char, end_char = line.split('\t')[1].split()
-                except ValueError:
-                    print('Oh no! Malformed annotation:\n' + line)
-                    continue
+        ann_fname = txt_fname.replace('.txt', '.ann')
 
-                begin_char, end_char = int(begin_char), int(end_char)
-                start_token = char2token[begin_char]
-                end_token = char2token[end_char]
+        if exists(ann_fname):
+            print('reading ' + ann_fname)
+            ann_count += 1
 
-                span = Span(doc, start_token, end_token, label=14)
+            for line in open(ann_fname):
+                if line.startswith('T'):
+                    try:
+                        label, begin_char, end_char = line.split('\t')[1].split()
+                    except ValueError:
+                        print('Oh no! Malformed annotation:\n' + line)
+                        continue
 
-                if span.start_char != begin_char or span.end_char != end_char:
-                    print('BRAT SPAN:   ', doc.text[begin_char:end_char])
-                    print('SPACY SPAN:  ', span)
-                    toks = [t.text
-                            for t in doc[max(0, start_token - 3):end_token + 3]]
-                    print('SPACY TOKENS:', toks)
-                    print()
-                    incorrect += 1
-                else:
-                    iob_tags[label][start_token] = 'B'
-                    for i in range(start_token + 1, end_token):
-                        iob_tags[label][i] = 'I'
-                    correct += 1
+                    begin_char, end_char = int(begin_char), int(end_char)
+                    start_token = char2token[begin_char]
+                    end_token = char2token[end_char]
+
+                    span = Span(doc, start_token, end_token, label=14)
+
+                    if span.start_char != begin_char or span.end_char != end_char:
+                        print('BRAT SPAN:   ', doc.text[begin_char:end_char])
+                        print('SPACY SPAN:  ', span)
+                        toks = [t.text
+                                for t in doc[max(0, start_token - 3):end_token + 3]]
+                        print('SPACY TOKENS:', toks)
+                        print()
+                        incorrect += 1
+                    else:
+                        iob_tags[label][start_token] = 'B'
+                        for i in range(start_token + 1, end_token):
+                            iob_tags[label][i] = 'I'
+                        correct += 1
+        else:
+            # test data has no annotation
+            print('WARNING: no annotation file ' + ann_fname)
 
         iob_fname = join(iob_dir, splitext(basename(ann_fname))[0] + '.json')
+        iob_count += 1
         write_iob_file(iob_fname, doc, iob_tags)
 
-    print('\n#succesful spans: {}\n#failed spans: {}'.format(
-        correct, incorrect))
+    print('\n#succesful spans: {}\n#failed spans: {}'.format(correct, incorrect))
+    print('\n#txt files: {}\n#ann files: {}\n#iob files: {}'.format(txt_count, ann_count, iob_count))
 
 
 def write_iob_file(iob_fname, doc, iob_tags):
