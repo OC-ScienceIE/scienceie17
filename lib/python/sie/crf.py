@@ -35,6 +35,11 @@ def generate_labels(iob_dir, labels_fname):
     pickle.dump(labels, open(labels_fname, 'wb'))
 
 
+def read_labels(labels_fname):
+    print('reading labels from ' + labels_fname)
+    return pickle.load(open(labels_fname, 'rb'))
+
+
 def generate_folds(labels_fname, folds_fname, max_n_folds=10):
     """
     Generate folds for CV exps with n = 2, ..., max_n_folds.
@@ -55,9 +60,25 @@ def generate_folds(labels_fname, folds_fname, max_n_folds=10):
     pickle.dump(folds, open(folds_fname, 'wb'))
 
 
-def read_labels(labels_fname):
-    print('reading labels from ' + labels_fname)
-    return pickle.load(open(labels_fname, 'rb'))
+def read_folds(folds_fname, n_folds):
+    print('reading folds from ' + folds_fname)
+    folds = pickle.load(open(folds_fname, 'rb'))
+    return folds[n_folds]
+
+
+def collect_features(iob_dir, *feat_dirs):
+    """
+    Collect the features to train/eval CRF classifier from the json files in one or more feat_dirs.
+    """
+    feats = []
+
+    for iob_fname in glob(join(iob_dir, '*.json')):
+        filename = basename(iob_fname)
+        feat_filenames = [join(dir, filename) for dir in feat_dirs]
+        text_feat = Features.from_file(*feat_filenames)
+        feats += text_feat
+
+    return feats
 
 
 def collect_crf_data(iob_dir, *feat_dirs):
@@ -131,7 +152,13 @@ def pred_to_iob(pred, filenames, true_iob_dir, pred_iob_dir):
 
         for token_count, token_iob in enumerate(sent_iob):
             for ent in ENTITIES:
-                token_iob[ent] = pred[ent][sent_count][token_count]
+                try:
+                     iob_tag = pred[ent][sent_count][token_count]
+                except KeyError:
+                    # assume no predictions for this entity type
+                    iob_tag = 'O'
+
+                token_iob[ent] = iob_tag
 
     write_pred_iob()
 
