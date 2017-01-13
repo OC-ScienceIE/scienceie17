@@ -1,15 +1,67 @@
 import json
+import pickle
 from glob import glob
 from os.path import join, basename
 from os import makedirs
 
 from sklearn_crfsuite import CRF
+from sklearn.model_selection import GroupKFold
 
 from sie import ENTITIES
 from sie.feats import Features
 
 
+def generate_labels(iob_dir, labels_fname):
+    """
+    Generate labels to train/eval CRF classifier.
+    Labels for entities are derived from IOB tags in the files in the iob_dir.
+    Filenames are the basenames of the iob files (used for creating folds and
+    converting back CRF predictions to IOB files).
+    Saved as a pickled dict with keys for all entity labels plus the special key __filenames__.
+    """
+    labels = dict((label, list()) for label in ENTITIES)
+    labels['__filenames__'] = []
+
+    for iob_fname in glob(join(iob_dir, '*.json')):
+        text_iob = json.load(open(iob_fname))
+        filename = basename(iob_fname)
+
+        for label in ENTITIES:
+            labels[label] += _text_iob_tags(text_iob, label)
+
+        labels['__filenames__'] += len(text_iob) * [filename]
+
+    print('writing labels to file ' + labels_fname)
+    pickle.dump(labels, open(labels_fname, 'wb'))
+
+
+def generate_folds(labels_fname, folds_fname, max_n_folds=10):
+    """
+    Generate folds for CV exps with n = 2, ..., max_n_folds.
+    Save as pickled dict with n as key.
+    """
+    filenames = read_labels(labels_fname)['__filenames__']
+    folds = {}
+
+    for n in range(2, max_n_folds + 1):
+        # Create folds from complete texts only
+        # (i.e. instances/sentences of the same text are never in different folds).
+        # There is no random seed, because the partitioning algorithm is deterministic.
+        group_k_fold = GroupKFold(n_splits=n)
+        # Don't bother to pass real X and Y, because they are not really used.
+        folds[n] = list(group_k_fold.split(filenames, filenames, filenames))
+
+    print('writing folds to ' + folds_fname)
+    pickle.dump(folds, open(folds_fname, 'wb'))
+
+
+def read_labels(labels_fname):
+    print('reading labels from ' + labels_fname)
+    return pickle.load(open(labels_fname, 'rb'))
+
+
 def collect_crf_data(iob_dir, *feat_dirs):
+    # *** DEPRECATED *** Do not use in new experiments!
     """
     Collect the data to train/eval CRF classifier.
     Labels for entities are derived from IOB tags in the files in the iob_dir.
@@ -84,7 +136,6 @@ def pred_to_iob(pred, filenames, true_iob_dir, pred_iob_dir):
     write_pred_iob()
 
 
-
 class PruneCRF(CRF):
     """
     CRF that prunes training sentences without entities (that is, no I or B labels)
@@ -100,7 +151,7 @@ class PruneCRF(CRF):
     def prune(self, X, y):
         Xp, yp = [], []
 
-        for xs, ys  in zip(X, y):
+        for xs, ys in zip(X, y):
             if any(l != 'O' for l in ys):
                 Xp.append(xs)
                 yp.append(ys)
