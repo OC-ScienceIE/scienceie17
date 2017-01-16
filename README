@@ -16,11 +16,11 @@ Setup
 
 2. Create virtual Python environment
 
-	$ conda create -n scienceie7 python=3 scikit-learn
+	$ conda create -n scienceie17 python=3 scikit-learn
 
 3. Activate environment
 
-	$ source activate scienceie7
+	$ source activate scienceie17
 
 4. Clone git repos
 
@@ -28,15 +28,15 @@ Setup
 
 5. Extend Python search path
 
-	$ export PYTHONPATH=<.../scienceie7>/bin:<.../scienceie7>/lib/python:$PYTHON
+	$ export PYTHONPATH=<.../scienceie17>/bin:<.../scienceie17>/lib/python:$PYTHON
 
-   where <.../scienceie7> is the full path to the local repository.
+   where <.../scienceie17> is the full path to the local repository.
 
 6. Install additional dependencies
 
  	$ pip install sklearn-crfsuite
-	$ pip install spacy
-	$ sputnik --name spacy --repository-url http://index.spacy.io install en==1.1.0
+	$ pip install -U spacy
+	$ python -m spacy.en.download all
 
 7. Preprocess data (run Spacy NLP, derive IOB tags)
 
