@@ -3,11 +3,12 @@ from glob import glob
 import json
 
 from sie import LOCAL_DIR
+from sie.utils import sorted_glob
 
 true_iob_dir = join(LOCAL_DIR, 'train', 'iob')
 synvec_feats_dir = join('_train', 'synvec_feats')
 
-for iob_fname in glob(join(true_iob_dir, '*'))[10:12]:
+for iob_fname in sorted_glob(join(true_iob_dir, '*'))[10:12]:
     doc_iob = json.load(open(iob_fname))
     synvec_fname = join(synvec_feats_dir, basename(iob_fname))
     doc_feats = json.load(open(synvec_fname))

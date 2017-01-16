@@ -12,12 +12,13 @@ import json
 from collections import namedtuple
 
 from sie import ENTITIES
+from sie.utils import sorted_glob
 
 Span = namedtuple('Span', ('label', 'begin', 'end'))
 
 
 def iob_to_brat(iob_dir, txt_dir, brat_dir):
-    for iob_fname in glob(join(iob_dir, '*.json')):
+    for iob_fname in sorted_glob(join(iob_dir, '*.json')):
         spans = get_text_spans(iob_fname)
         # need text file for correct whitespace
         txt_fname = join(txt_dir,

@@ -15,6 +15,7 @@ from spacy.tokens.doc import Doc
 from spacy.tokens import Span
 
 from sie import ENTITIES
+from sie.utils import sorted_glob
 
 
 def run_nlp(txt_dir, spacy_dir, nlp=None):
@@ -27,7 +28,7 @@ def run_nlp(txt_dir, spacy_dir, nlp=None):
 
     makedirs(spacy_dir, exist_ok=True)
 
-    for txt_fname in glob(join(txt_dir, '*.txt')):
+    for txt_fname in sorted_glob(join(txt_dir, '*.txt')):
         print('reading ' + txt_fname)
         text = open(txt_fname).read()
         # Spacy considers '\n' as a separate token.
@@ -54,7 +55,7 @@ def generate_iob_tags(ann_dir, spacy_dir, iob_dir, nlp=None):
     correct = incorrect = 0
     txt_count = ann_count = iob_count = 0
 
-    for txt_fname in glob(join(ann_dir, '*.txt')):
+    for txt_fname in sorted_glob(join(ann_dir, '*.txt')):
         txt_count += 1
         spacy_fname = join(spacy_dir, splitext(basename(txt_fname))[0] + '.spacy')
         doc = read_doc(spacy_fname, nlp)
@@ -196,7 +197,7 @@ def add_entities(ann_dir, spacy_dir, ents_dir=None, nlp=None):
     register_entities(nlp)
     correct = incorrect = 0
 
-    for ann_fname in glob(join(ann_dir, '*.ann')):
+    for ann_fname in sorted_glob(join(ann_dir, '*.ann')):
         print('reading ' + ann_fname)
         spacy_fname = join(spacy_dir,
                            splitext(basename(ann_fname))[0] + '.spacy')

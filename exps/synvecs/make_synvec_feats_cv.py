@@ -49,6 +49,7 @@ from sie.spacynlp import read_doc
 from sie import LOCAL_DIR, ENTITIES
 from sie.crf import collect_crf_data
 from sie.feats import Features
+from sie.utils import sorted_glob
 
 CONTENT_POS = set(['NOUN', 'PROPN', 'VERB', 'ADJ', 'ADV'])
 
@@ -100,8 +101,8 @@ def get_entity_lempos_counts(iob_dir, spacy_dir, nlp=None, use_pickle=True):
         except IOError:
             pass
 
-    iob_fnames = glob(join(iob_dir, '*'))
-    spacy_fnames = glob(join(spacy_dir, '*'))
+    iob_fnames = sorted_glob(join(iob_dir, '*'))
+    spacy_fnames = sorted_glob(join(spacy_dir, '*'))
     counts = {}
 
     if not nlp:

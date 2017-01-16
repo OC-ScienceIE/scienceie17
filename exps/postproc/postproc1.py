@@ -22,6 +22,7 @@ import json
 
 from sie import ENTITIES, EXPS_DIR, DATA_DIR
 from sie.brat import iob_to_brat
+from sie.utils import sorted_glob
 
 from eval import calculateMeasures
 
@@ -102,7 +103,7 @@ def relabel(text_iob, tokens2labels):
 def all_token_labels(in_iob_dir, out_iob_dir):
     makedirs(out_iob_dir, exist_ok=True)
 
-    for in_iob_fname in glob(join(in_iob_dir, '*.json')):
+    for in_iob_fname in sorted_glob(join(in_iob_dir, '*.json')):
         print('reading ' + in_iob_fname)
         text_iob = json.load(open(in_iob_fname))
         tokens2labels = get_token_labels(text_iob)

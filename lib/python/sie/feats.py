@@ -10,6 +10,7 @@ from os.path import join, splitext, basename
 import spacy
 
 from sie.spacynlp import read_doc
+from sie.utils import sorted_glob
 
 
 class Features(list):
@@ -63,7 +64,7 @@ def generate_feats(spacy_dir, feat_dir, feat_func):
     nlp = spacy.load('en')
     makedirs(feat_dir, exist_ok=True)
 
-    for spacy_fname in glob(join(spacy_dir, '*.spacy')):
+    for spacy_fname in sorted_glob(join(spacy_dir, '*.spacy')):
         doc = read_doc(spacy_fname, nlp)
 
         feat_fname = join(feat_dir,

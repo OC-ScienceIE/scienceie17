@@ -9,6 +9,7 @@ from sklearn.model_selection import GroupKFold
 
 from sie import ENTITIES
 from sie.feats import Features
+from sie.utils import sorted_glob
 
 
 def generate_labels(iob_dir, labels_fname):
@@ -22,7 +23,7 @@ def generate_labels(iob_dir, labels_fname):
     labels = dict((label, list()) for label in ENTITIES)
     labels['__filenames__'] = []
 
-    for iob_fname in glob(join(iob_dir, '*.json')):
+    for iob_fname in sorted_glob(join(iob_dir, '*.json')):
         text_iob = json.load(open(iob_fname))
         filename = basename(iob_fname)
 
@@ -72,7 +73,7 @@ def collect_features(iob_dir, *feat_dirs):
     """
     feats = []
 
-    for iob_fname in glob(join(iob_dir, '*.json')):
+    for iob_fname in sorted_glob(join(iob_dir, '*.json')):
         filename = basename(iob_fname)
         feat_filenames = [join(dir, filename) for dir in feat_dirs]
         text_feat = Features.from_file(*feat_filenames)
@@ -93,7 +94,7 @@ def collect_crf_data(iob_dir, *feat_dirs):
     data['feats'] = []
     data['filenames'] = []
 
-    for iob_fname in glob(join(iob_dir, '*.json')):
+    for iob_fname in sorted_glob(join(iob_dir, '*.json')):
         text_iob = json.load(open(iob_fname))
 
         filename = basename(iob_fname)
