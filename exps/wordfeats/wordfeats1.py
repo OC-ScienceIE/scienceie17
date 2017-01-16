@@ -35,7 +35,8 @@ def wordfeats1(sent):
             'suffix4': token.orth_[-4:] if l > 3 else '',
             'char_size': l,
             'is_stop': token.is_stop,
-            'rank': token.rank
+            # This numerical feature has large range and causes weird behaviour...
+            #'rank': token.rank
         }
 
         sent_feats.append(token_feats)
