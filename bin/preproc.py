@@ -13,9 +13,13 @@ Writes file output to dir _local.
 from os.path import join
 from os import makedirs
 
+import spacy
+
 from sie import DATA_DIR, LOCAL_DIR
 from sie.spacynlp import run_nlp, generate_iob_tags
 from sie.crf import generate_labels, generate_folds
+
+nlp = spacy.load('en')
 
 data_parts = 'train', 'dev', 'test'
 
@@ -26,12 +30,12 @@ for part in data_parts:
     spacy_dir = join(LOCAL_DIR, part, 'spacy')
     makedirs(spacy_dir, exist_ok=True)
 
-    run_nlp(part_dir, spacy_dir)
+    run_nlp(part_dir, spacy_dir, nlp=nlp)
 
     iob_dir = join(LOCAL_DIR, part, 'iob')
     makedirs(iob_dir, exist_ok=True)
 
-    generate_iob_tags(part_dir, spacy_dir, iob_dir)
+    generate_iob_tags(part_dir, spacy_dir, iob_dir, nlp=nlp)
 
     labels_fname = join(LOCAL_DIR, part, part + '_labels.pkl')
     generate_labels(iob_dir, labels_fname)

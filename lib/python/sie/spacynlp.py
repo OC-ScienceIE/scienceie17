@@ -36,7 +36,6 @@ def run_nlp(txt_dir, spacy_dir, nlp=None):
         doc = nlp(text.rstrip('\n'))
         spacy_fname = join(spacy_dir,
                            splitext(basename(txt_fname))[0] + '.spacy')
-        print('writing ' + spacy_fname)
         write_doc(spacy_fname, doc)
 
 
