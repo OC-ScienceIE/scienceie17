@@ -23,7 +23,7 @@ from eval import calculateMeasures
 # Step 1: Reuse features
 
 base_feats_dir = join(EXPS_DIR, 'crf1/_train/features1')
-word_feats_dir = join('_train', join(EXPS_DIR, 'wordfeats/_train/wordfeats1'))
+word_feats_dir = join(EXPS_DIR, 'wordfeats/_train/wordfeats1')
 
 
 # Step 2: Collect data for running CRF classifier

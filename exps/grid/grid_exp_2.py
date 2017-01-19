@@ -17,8 +17,8 @@ from sie.exp import eval_exp_train
 
 # Collect data for running CRF classifier
 base_feats_dir = join(EXPS_DIR, 'crf1/_train/features1')
-word_feats_dir = join('_train', join(EXPS_DIR, 'wordfeats/_train/wordfeats1'))
-wn_feats_dir = join('_train', join(EXPS_DIR, 'morewn/_train/wnfeats1'))
+word_feats_dir = join(EXPS_DIR, 'wordfeats/_train/wordfeats1')
+wn_feats_dir = join(EXPS_DIR, 'morewn/_train/wnfeats1')
 
 feat_dirs = [
     base_feats_dir,
