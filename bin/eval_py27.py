@@ -1,8 +1,6 @@
 #!/usr/bin/python
-# by Mattew Peters, who spotted that sklearn does macro averaging not micro averaging correctly and changed it
 
 import os
-from sklearn.metrics import precision_recall_fscore_support
 import sys
 import copy
 
@@ -55,64 +53,47 @@ def calculateMeasures(folder_gold="data/dev/", folder_pred="data_pred/dev/", rem
                 # those are the false negatives, contained in gold but not pred
                 res_all_pred.append("NONE")
 
+    p_map, r_map, f1_map = precision_recall_fscore(res_all_gold, res_all_pred, targets)
 
-    #y_true, y_pred, labels, targets
-    prec, recall, f1, support = precision_recall_fscore_support(
-        res_all_gold, res_all_pred, labels=targets, average=None)
-    # unpack the precision, recall, f1 and support
-    metrics = {}
-    for k, target in enumerate(targets):
-        metrics[target] = {
-            'precision': prec[k],
-            'recall': recall[k],
-            'f1-score': f1[k],
-            'support': support[k]
-        }
-
-    # now micro-averaged
-    if remove_anno != 'types':
-        prec, recall, f1, s = precision_recall_fscore_support(
-            res_all_gold, res_all_pred, labels=targets, average='micro')
-        metrics['overall'] = {
-            'precision': prec,
-            'recall': recall,
-            'f1-score': f1,
-            'support': sum(support)
-        }
-    else:
-        # just binary classification, nothing to average
-        metrics['overall'] = metrics['KEYPHRASE-NOTYPES']
-
-    print_report(metrics, targets)
-    return metrics
+    return p_map, r_map, f1_map
 
 
+def precision_recall_fscore(y_true, y_pred, labels=None, average=None):
 
-def print_report(metrics, targets, digits=2):
-    def _get_line(results, target, columns):
-        line = [target]
-        for column in columns[:-1]:
-            line.append("{0:0.{1}f}".format(results[column], digits))
-        line.append("%s" % results[columns[-1]])
-        return line
+    p_map, r_map, f1_map = {}, {}, {}
+    tp_map, fp_map, fn_map = {}, {}, {}
+    for l in set(labels):
+        tp_map[l], fp_map[l], fn_map[l] = 0.0, 0.0, 0.0
 
-    columns = ['precision', 'recall', 'f1-score', 'support']
+    for i, gold in enumerate(y_true):
+        pred = y_pred[i]
+        if gold == pred:
+            tp_map[gold] += 1
+        elif gold == "NONE" and pred != "NONE":
+            fp_map[pred] += 1
+        else:
+            fn_map[gold] += 1
 
-    fmt = '%11s' + '%9s' * 4 + '\n'
-    report = [fmt % tuple([''] + columns)]
-    report.append('\n')
-    for target in targets:
-        results = metrics[target]
-        line = _get_line(results, target, columns)
-        report.append(fmt % tuple(line))
-    report.append('\n')
+    tp_all = sum(tp_map[l] for l in set(labels))
+    fp_all = sum(fp_map[l] for l in set(labels))
+    fn_all = sum(fn_map[l] for l in set(labels))
 
-    # overall
-    line = _get_line(metrics['overall'], 'avg / total', columns)
-    report.append(fmt % tuple(line))
-    report.append('\n')
+    print "\nlabel\t\tprecision\trecall\tf1"
+    for l in set(labels):
+        r_map[l] = tp_map[l] / (tp_map[l] + fn_map[l])
+        p_map[l] = tp_map[l] / (tp_map[l] + fp_map[l])
+        f1_map[l] = (2 * p_map[l] * r_map[l] / (p_map[l] + r_map[l]))
 
-    print(''.join(report))
+        print l, p_map[l], r_map[l], f1_map[l]
+
+    r_map["all_micro"] = tp_all / (tp_all + fn_all)
+    p_map["all_micro"] = tp_all / (tp_all + fp_all)
+    f1_map["all_micro"] = (2 * p_map["all_micro"] * r_map["all_micro"] / (p_map["all_micro"] + r_map["all_micro"]))
+
+    print "all_micro", p_map["all_micro"], r_map["all_micro"], f1_map["all_micro"]
+
+    return p_map, r_map, f1_map
+
 
 
 def normaliseAnnotations(file_anno, remove_anno):
