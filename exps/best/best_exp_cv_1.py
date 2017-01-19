@@ -9,6 +9,7 @@ sys.path.append(os.getcwd())
 
 from sie.crf import PruneCRF
 from sie.exp import run_exp_train_cv, eval_exp_train
+from sie.postproc import postproc_labels
 
 from best_feats import make_feats
 
@@ -45,4 +46,4 @@ preds[label] = run_exp_train_cv(crf, feat_dirs, label, n_folds=5, n_jobs=-1)
 # Evaluate
 # ----------------------------------------------------------------------------
 
-eval_exp_train(preds)  # , postproc=postproc_labels)
+eval_exp_train(preds, postproc=postproc_labels)
