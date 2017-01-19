@@ -123,7 +123,7 @@ def run_exp_train_cv(crf, feat_dirs, target_label, n_folds=5, n_jobs=-1):
     return y_pred
 
 
-def eval_exp_train(preds, part='train'):
+def eval_exp_train(preds, part='train', postproc=None):
     """
     Evaluate predictions from experiment
 
@@ -139,6 +139,11 @@ def eval_exp_train(preds, part='train'):
     # Convert CRF prediction to IOB tags
     pred_iob_dir = '_' + part + '/iob'
     pred_to_iob(preds, filenames, true_iob_dir, pred_iob_dir)
+
+    if postproc:
+        postproc_dir = '_' + part + '/iob_pp'
+        postproc(pred_iob_dir, postproc_dir)
+        pred_iob_dir = postproc_dir
 
     # Convert predicted IOB tags to predicted Brat annotations
     txt_dir = join(DATA_DIR, part)

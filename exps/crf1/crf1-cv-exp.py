@@ -24,7 +24,7 @@ generate_feats(spacy_dir, base_feats_dir, features1)
 
 # Step 2: Run experiments
 
-crf = CRF(c1=0.1, c2=0.1, all_possible_transitions=True)
+crf = CRF()#c1=0.1, c2=0.1, all_possible_transitions=True)
 feat_dirs = [base_feats_dir]
 preds = {}
 

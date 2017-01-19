@@ -8,6 +8,7 @@ from os import makedirs
 from os.path import join, splitext, basename
 
 import spacy
+from nltk.corpus import wordnet as wn
 
 from sie.spacynlp import read_doc
 from sie.utils import sorted_glob
@@ -52,7 +53,7 @@ class Features(list):
                 d1.update(d2)
 
 
-def generate_feats(spacy_dir, feat_dir, feat_func):
+def generate_feats(spacy_dir, feat_dir, feat_func, nlp=None):
     """
     Generate features and save to file
 
@@ -61,7 +62,8 @@ def generate_feats(spacy_dir, feat_dir, feat_func):
     :param feat_func: function for generating
     :return:
     """
-    nlp = spacy.load('en')
+    if not nlp:
+        nlp = spacy.load('en')
     makedirs(feat_dir, exist_ok=True)
 
     for spacy_fname in sorted_glob(join(spacy_dir, '*.spacy')):
@@ -75,7 +77,7 @@ def generate_feats(spacy_dir, feat_dir, feat_func):
         text_feats.to_file(feat_fname)
 
 
-def features1(sent, context_size=2, undefined='__'):
+def lemma_pos_feats(sent, context_size=2, undefined='__'):
     """
     Examle of a simple feature function which generates, for each token in
     the sentence, its lemma and POS as well as that of the two
@@ -153,6 +155,105 @@ def features1(sent, context_size=2, undefined='__'):
 
             token_feats['{}:lemma'.format(j)] = lemma
             token_feats['{}:pos'.format(j)] = pos
+
+        sent_feats.append(token_feats)
+
+    return sent_feats
+
+
+# DEPRECATED, for backward compatabiity only
+features1 = lemma_pos_feats
+
+
+def word_feats(sent, context_size=0, undefined='__'):
+    """
+    word form features
+    """
+    sent_feats = []
+
+    for i in range(len(sent)):
+        token_feats = {}
+
+        for j in range(-context_size, context_size + 1):
+            k = j + i
+
+            if 0 <= k < len(sent):
+                token = sent[k]
+                l = len(token.orth_)
+
+                token_feats['{}:word'.format(j)] = token.orth_
+                token_feats['{}:shape'.format(j)] = token.shape_
+                token_feats['{}:is_alpha'.format(j)] = token.is_alpha
+                token_feats['{}:is_lower'.format(j)] = token.is_lower
+                token_feats['{}:is_ascii'.format(j)] = token.is_ascii
+                token_feats['{}:is_capitalized'.format(j)] = token.orth_.istitle()
+                token_feats['{}:is_upper'.format(j)] = token.orth_.isupper()
+                token_feats['{}:is_punct'.format(j)] = token.is_punct
+                token_feats['{}:like_num'.format(j)] = token.like_num
+                token_feats['{}:prefix2'.format(j)] = token.orth_[:2] if l > 1 else ''
+                token_feats['{}:suffix2'.format(j)] = token.orth_[-2:] if l > 1 else ''
+                token_feats['{}:prefix3'.format(j)] = token.orth_[:3] if l > 2 else ''
+                token_feats['{}:suffix3'.format(j)] = token.orth_[-3:] if l > 2 else ''
+                token_feats['{}:prefix4'.format(j)] = token.orth_[:4] if l > 3 else ''
+                token_feats['{}:suffix4'.format(j)] = token.orth_[-4:] if l > 3 else ''
+                # Crfsuite does not support numerical features (are converted to "one hot")
+                # token_feats['{}:char_size'.format(j)] =  l
+                token_feats['{}:is_stop'.format(j)] = token.is_stop
+                # This numerical feature has large range and causes weird behaviour...
+                # token_feats['{}:rank'.format(j)] =  token.rank
+
+        sent_feats.append(token_feats)
+
+    return sent_feats
+
+
+def wordnet_feats(sent, context_size=2, undefined='__'):
+    """
+    wordnet features
+    """
+    sent_feats = []
+
+    for i, token in enumerate(sent):
+        token_feats = {}
+
+        for j in range(-context_size, context_size + 1):
+            k = j + i
+
+            if 0 <= k < len(sent):
+                lemma = sent[k].lemma_
+                pos = sent[k].pos_
+
+                wn_pos = getattr(wn, pos, None)
+                synsets = wn.synsets(lemma, pos=wn_pos)  # or wn.synsets(lemma)
+
+                for synset in synsets:
+                    # token_feats['{}:{}'.format(j, synset.name())] = 1
+
+                    for hyp_synset in synset.closure(lambda s: s.hypernyms()):
+                        token_feats['{}:hyp:{}'.format(j, hyp_synset.name())] = 1
+
+        sent_feats.append(token_feats)
+
+    return sent_feats
+
+
+def brown_feats(sent, context_size=1, undefined='__'):
+    """
+    Brown cluster features
+    """
+    sent_feats = []
+
+    for i in range(len(sent)):
+        token_feats = {}
+
+        for j in range(-context_size, context_size + 1):
+            k = j + i
+
+            if 0 <= k < len(sent):
+                bit_string = '{0:016b}'.format(sent[k].cluster)
+
+                for p in [2,4,6,8,10,12,16]:
+                    token_feats['{}:brown:{}'.format(j, p)] = bit_string[-p:]
 
         sent_feats.append(token_feats)
 
