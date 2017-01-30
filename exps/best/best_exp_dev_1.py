@@ -49,4 +49,5 @@ preds[label] = run_exp_dev(crf, train_feat_dirs, dev_feat_dirs, label)
 # Evaluate
 # ----------------------------------------------------------------------------
 
-eval_exp_train(preds, 'dev', postproc=postproc_labels)
+eval_exp_train(preds, 'dev', postproc=postproc_labels, zip_fname='best_exp_dev_1.zip')
+

@@ -3,6 +3,7 @@ setups for running experiments
 """
 
 from os.path import join
+from subprocess import call
 
 from sklearn.model_selection import cross_val_predict
 from sklearn_crfsuite.metrics import flat_classification_report
@@ -11,7 +12,6 @@ from eval import calculateMeasures
 from sie import LOCAL_DIR, DATA_DIR
 from sie.brat import iob_to_brat
 from sie.crf import collect_features, read_labels, read_folds, pred_to_iob
-
 
 
 def run_exp_train(crf, feat_dirs, target_label):
@@ -123,7 +123,7 @@ def run_exp_train_cv(crf, feat_dirs, target_label, n_folds=5, n_jobs=-1):
     return y_pred
 
 
-def eval_exp_train(preds, part='train', postproc=None):
+def eval_exp_train(preds, part='train', postproc=None, zip_fname=None):
     """
     Evaluate predictions from experiment
 
@@ -153,3 +153,14 @@ def eval_exp_train(preds, part='train', postproc=None):
     # Evaluate
     calculateMeasures(txt_dir, brat_dir, 'rel')
 
+    if zip_fname:
+        package(brat_dir, part, zip_fname)
+
+    return brat_dir
+
+
+def package(brat_dir, part, zip_fname):
+    txt_dir = join(DATA_DIR, part)
+    args = 'zip -j {} {} {}'.format(zip_fname, join(txt_dir, '*.txt'), join(brat_dir, '*.ann'))
+    print(args)
+    call(args, shell=True)
