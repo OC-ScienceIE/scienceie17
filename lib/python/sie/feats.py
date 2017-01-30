@@ -258,3 +258,33 @@ def brown_feats(sent, context_size=1, undefined='__'):
         sent_feats.append(token_feats)
 
     return sent_feats
+
+
+def dep_feats(sent, context_size=0, undefined='__'):
+    """
+    word form features
+    """
+    sent_feats = []
+
+    for i in range(len(sent)):
+        token_feats = {}
+
+        for j in range(-context_size, context_size + 1):
+            k = j + i
+
+            if 0 <= k < len(sent):
+                token = sent[k]
+                l = len(token.orth_)
+
+                token_feats['{}:head.lemma'.format(j)] = token.head.lemma_
+                token_feats['{}:dep'.format(j)] = token.dep_
+                token_feats['{}:triple'.format(j)] = '#'.join([token.lemma_, token.dep_, token.head.lemma_])
+                # token_feats['{}:head.pos'.format(j)] = token.head.pos_
+
+                # token_feats['{}:head.head.lemma'.format(j)] = token.head.lemma_
+                # token_feats['{}:dep+head.lemma'.format(j)] = token.dep_ + '+' + token.head.lemma_
+        # token_feats['head_dist'] = str(token.i - token.head.i)
+
+        sent_feats.append(token_feats)
+
+    return sent_feats

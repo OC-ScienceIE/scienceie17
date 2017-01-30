@@ -7,7 +7,7 @@ from os.path import join, exists
 import spacy
 
 from sie import LOCAL_DIR
-from sie.feats import lemma_pos_feats, word_feats, wordnet_feats, generate_feats
+from sie.feats import lemma_pos_feats, word_feats, wordnet_feats, generate_feats, dep_feats
 
 nlp = spacy.load('en')
 
@@ -42,6 +42,13 @@ def make_material_feats(part, force):
                        lambda s: wordnet_feats(s, context_size=2),
                        nlp=nlp)
 
+    dep_feats_dir = '_{}/Material/dep_feats'.format(part)
+    if force or not exists(dep_feats_dir):
+        generate_feats(spacy_dir,
+                       dep_feats_dir,
+                       lambda s: dep_feats(s, context_size=2),
+                       nlp=nlp)
+
     return [lempos_feats_dir, word_feats_dir, wn_feats_dir]
 
 
@@ -57,6 +64,13 @@ def make_process_feats(part, force):
         generate_feats(spacy_dir,
                        word_feats_dir,
                        lambda sent: word_feats(sent, context_size=1),
+                       nlp=nlp)
+
+    dep_feats_dir = '_{}/Process/dep_feats'.format(part)
+    if force or not exists(dep_feats_dir):
+        generate_feats(spacy_dir,
+                       dep_feats_dir,
+                       lambda sent: dep_feats(sent, context_size=1),
                        nlp=nlp)
 
     return [lempos_feats_dir, word_feats_dir]
@@ -77,6 +91,13 @@ def make_task_feats(part, force):
         generate_feats(spacy_dir,
                        word_feats_dir,
                        lambda sent: word_feats(sent, context_size=0),
+                       nlp=nlp)
+
+    dep_feats_dir = '_{}/Task/dep_feats'.format(part)
+    if force or not exists(dep_feats_dir):
+        generate_feats(spacy_dir,
+                       dep_feats_dir,
+                       lambda sent: dep_feats(sent, context_size=1),
                        nlp=nlp)
 
     return [lempos_feats_dir, word_feats_dir]
