@@ -66,6 +66,7 @@ def get_text_spans(iob_fname):
 
 def write_brat_file(brat_fname, spans, text):
     print('writing ' + brat_fname)
+    spans.sort(key=lambda x: x.begin)
     with open(brat_fname, 'w') as outf:
         for i, span in enumerate(spans):
             outf.write('T{}\t{} {} {}\t{}\n'.format(
@@ -75,3 +76,16 @@ def write_brat_file(brat_fname, spans, text):
                 span.end,
                 text[span.begin:span.end]
             ))
+
+def read_brat_file(brat_fname):
+    # only for entities, not relations!
+    print('reading ' + brat_fname)
+    spans = []
+
+    with open(brat_fname) as inf:
+        for line in inf:
+            label, begin, end = line.strip().split('\t')[1].split()
+            spans.append(Span(label, int(begin), int(end)))
+
+    return spans
+
